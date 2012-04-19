@@ -3,7 +3,7 @@ Installation
 ============
 
   
-    To instal tables in database simply type this in your project console:
+    To install tables in database simply type this in your project console:
 
     php app/console doctrine:schema:update --force
 
