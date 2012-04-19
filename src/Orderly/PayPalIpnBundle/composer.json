@@ -1,0 +1,20 @@
+{
+    "name": "orderly/paypalipn-bundle",
+    "type": "symfony-bundle",
+    "description": "PayPal IPN messages listener",
+    "keywords": ["payment", "paypal", "ipn"],
+    "homepage": "https://github.com/orderly/symfony2-paypal-ipn",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "Alexander Dean",
+            "email": "alex@keplarllp.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-0": { "Orderly\\PayPalIpnBundle": "" }
+    },
+    "target-dir": "Orderly\\PayPalIpnBundle"
+}

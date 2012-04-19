@@ -1,0 +1,474 @@
+IpnOrders:
+  type: entity
+  table: ipn_orders
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    notifyVersion:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: notify_version
+    verifySign:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: verify_sign
+    testIpn:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: test_ipn
+    protectionEligibility:
+      type: string
+      length: 24
+      fixed: false
+      nullable: true
+      column: protection_eligibility
+    charset:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+    btnId:
+      type: string
+      length: 40
+      fixed: false
+      nullable: true
+      column: btn_id
+    addressCity:
+      type: string
+      length: 40
+      fixed: false
+      nullable: true
+      column: address_city
+    addressCountry:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: address_country
+    addressCountryCode:
+      type: string
+      length: 2
+      fixed: false
+      nullable: true
+      column: address_country_code
+    addressName:
+      type: string
+      length: 128
+      fixed: false
+      nullable: true
+      column: address_name
+    addressState:
+      type: string
+      length: 40
+      fixed: false
+      nullable: true
+      column: address_state
+    addressStatus:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: address_status
+    addressStreet:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: address_street
+    addressZip:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: address_zip
+    firstName:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: first_name
+    lastName:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: last_name
+    payerBusinessName:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: payer_business_name
+    payerEmail:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: payer_email
+    payerId:
+      type: string
+      length: 13
+      fixed: false
+      nullable: true
+      column: payer_id
+    payerStatus:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: payer_status
+    contactPhone:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: contact_phone
+    residenceCountry:
+      type: string
+      length: 2
+      fixed: false
+      nullable: true
+      column: residence_country
+    business:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+    receiverEmail:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: receiver_email
+    receiverId:
+      type: string
+      length: 13
+      fixed: false
+      nullable: true
+      column: receiver_id
+    custom:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    invoice:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+    memo:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+    tax:
+      type: decimal
+      nullable: true
+    authId:
+      type: string
+      length: 19
+      fixed: false
+      nullable: true
+      column: auth_id
+    authExp:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: auth_exp
+    authAmount:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: auth_amount
+    authStatus:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: auth_status
+    numCartItems:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: num_cart_items
+    parentTxnId:
+      type: string
+      length: 19
+      fixed: false
+      nullable: true
+      column: parent_txn_id
+    paymentDate:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: payment_date
+    paymentStatus:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: payment_status
+    paymentType:
+      type: string
+      length: 10
+      fixed: false
+      nullable: true
+      column: payment_type
+    pendingReason:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: pending_reason
+    reasonCode:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: reason_code
+    remainingSettle:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: remaining_settle
+    shippingMethod:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: shipping_method
+    shipping:
+      type: decimal
+      nullable: true
+    transactionEntity:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: transaction_entity
+    txnId:
+      type: string
+      length: 19
+      fixed: false
+      nullable: true
+      column: txn_id
+    txnType:
+      type: string
+      length: 20
+      fixed: false
+      nullable: true
+      column: txn_type
+    exchangeRate:
+      type: decimal
+      nullable: true
+      column: exchange_rate
+    mcCurrency:
+      type: string
+      length: 3
+      fixed: false
+      nullable: true
+      column: mc_currency
+    mcFee:
+      type: decimal
+      nullable: true
+      column: mc_fee
+    mcGross:
+      type: decimal
+      nullable: true
+      column: mc_gross
+    mcHandling:
+      type: decimal
+      nullable: true
+      column: mc_handling
+    mcShipping:
+      type: decimal
+      nullable: true
+      column: mc_shipping
+    paymentFee:
+      type: decimal
+      nullable: true
+      column: payment_fee
+    paymentGross:
+      type: decimal
+      nullable: true
+      column: payment_gross
+    settleAmount:
+      type: decimal
+      nullable: true
+      column: settle_amount
+    settleCurrency:
+      type: string
+      length: 3
+      fixed: false
+      nullable: true
+      column: settle_currency
+    auctionBuyerId:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: auction_buyer_id
+    auctionClosingDate:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: auction_closing_date
+    auctionMultiItem:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: auction_multi_item
+    forAuction:
+      type: string
+      length: 10
+      fixed: false
+      nullable: true
+      column: for_auction
+    subscrDate:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: subscr_date
+    subscrEffective:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: subscr_effective
+    period1:
+      type: string
+      length: 10
+      fixed: false
+      nullable: true
+    period2:
+      type: string
+      length: 10
+      fixed: false
+      nullable: true
+    period3:
+      type: string
+      length: 10
+      fixed: false
+      nullable: true
+    amount1:
+      type: decimal
+      nullable: true
+    amount2:
+      type: decimal
+      nullable: true
+    amount3:
+      type: decimal
+      nullable: true
+    mcAmount1:
+      type: decimal
+      nullable: true
+      column: mc_amount1
+    mcAmount2:
+      type: decimal
+      nullable: true
+      column: mc_amount2
+    mcAmount3:
+      type: decimal
+      nullable: true
+      column: mc_amount3
+    recurring:
+      type: string
+      length: 1
+      fixed: false
+      nullable: true
+    reattempt:
+      type: string
+      length: 1
+      fixed: false
+      nullable: true
+    retryAt:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: retry_at
+    recurTimes:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: recur_times
+    username:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+    password:
+      type: string
+      length: 24
+      fixed: false
+      nullable: true
+    subscrId:
+      type: string
+      length: 19
+      fixed: false
+      nullable: true
+      column: subscr_id
+    caseId:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: case_id
+    caseType:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: case_type
+    caseCreationDate:
+      type: string
+      length: 28
+      fixed: false
+      nullable: true
+      column: case_creation_date
+    orderStatus:
+      type: enumorderstatus
+      nullable: true
+      column: order_status
+    discount:
+      type: decimal
+      nullable: true
+    shippingDiscount:
+      type: decimal
+      nullable: true
+      column: shipping_discount
+    ipnTrackId:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: ipn_track_id
+    transactionSubject:
+      type: string
+      length: 255
+      fixed: false
+      nullable: true
+      column: transaction_subject
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+  lifecycleCallbacks: {  }

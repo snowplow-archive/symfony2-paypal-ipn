@@ -1,0 +1,145 @@
+IpnOrderItems:
+  type: entity
+  table: ipn_order_items
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    orderId:
+      type: integer
+      unsigned: false
+      nullable: true
+      column: order_id
+    itemName:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: item_name
+    itemNumber:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+      column: item_number
+    quantity:
+      type: string
+      length: 127
+      fixed: false
+      nullable: true
+    mcGross:
+      type: decimal
+      nullable: true
+      column: mc_gross
+    mcHandling:
+      type: decimal
+      nullable: true
+      column: mc_handling
+    mcShipping:
+      type: decimal
+      nullable: true
+      column: mc_shipping
+    tax:
+      type: decimal
+      nullable: true
+    costPerItem:
+      type: decimal
+      nullable: true
+      column: cost_per_item
+    optionName1:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_1
+    optionSelection1:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_1
+    optionName2:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_2
+    optionSelection2:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_2
+    optionName3:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_3
+    optionSelection3:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_3
+    optionName4:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_4
+    optionSelection4:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_4
+    optionName5:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_5
+    optionSelection5:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_5
+    optionName6:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_6
+    optionSelection6:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_6
+    optionName7:
+      type: string
+      length: 64
+      fixed: false
+      nullable: true
+      column: option_name_7
+    optionSelection7:
+      type: string
+      length: 200
+      fixed: false
+      nullable: true
+      column: option_selection_7
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+  lifecycleCallbacks: {  }

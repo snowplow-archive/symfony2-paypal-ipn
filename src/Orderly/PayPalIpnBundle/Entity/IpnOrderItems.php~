@@ -1,0 +1,200 @@
+<?php
+
+namespace Orderly\PayPalIpnBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Orderly\PayPalIpnBundle\Entity\IpnOrderItems
+ *
+ * @ORM\Table(name="ipn_order_items")
+ * @ORM\Entity
+ */
+class IpnOrderItems
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer $orderId
+     *
+     * @ORM\Column(name="order_id", type="integer", nullable=true)
+     */
+    private $orderId;
+
+    /**
+     * @var string $itemName
+     *
+     * @ORM\Column(name="item_name", type="string", length=127, nullable=true)
+     */
+    private $itemName;
+
+    /**
+     * @var string $itemNumber
+     *
+     * @ORM\Column(name="item_number", type="string", length=127, nullable=true)
+     */
+    private $itemNumber;
+
+    /**
+     * @var string $quantity
+     *
+     * @ORM\Column(name="quantity", type="string", length=127, nullable=true)
+     */
+    private $quantity;
+
+    /**
+     * @var decimal $mcGross
+     *
+     * @ORM\Column(name="mc_gross", type="decimal", nullable=true)
+     */
+    private $mcGross;
+
+    /**
+     * @var decimal $mcHandling
+     *
+     * @ORM\Column(name="mc_handling", type="decimal", nullable=true)
+     */
+    private $mcHandling;
+
+    /**
+     * @var decimal $mcShipping
+     *
+     * @ORM\Column(name="mc_shipping", type="decimal", nullable=true)
+     */
+    private $mcShipping;
+
+    /**
+     * @var decimal $tax
+     *
+     * @ORM\Column(name="tax", type="decimal", nullable=true)
+     */
+    private $tax;
+
+    /**
+     * @var decimal $costPerItem
+     *
+     * @ORM\Column(name="cost_per_item", type="decimal", nullable=true)
+     */
+    private $costPerItem;
+
+    /**
+     * @var string $optionName1
+     *
+     * @ORM\Column(name="option_name_1", type="string", length=64, nullable=true)
+     */
+    private $optionName1;
+
+    /**
+     * @var string $optionSelection1
+     *
+     * @ORM\Column(name="option_selection_1", type="string", length=200, nullable=true)
+     */
+    private $optionSelection1;
+
+    /**
+     * @var string $optionName2
+     *
+     * @ORM\Column(name="option_name_2", type="string", length=64, nullable=true)
+     */
+    private $optionName2;
+
+    /**
+     * @var string $optionSelection2
+     *
+     * @ORM\Column(name="option_selection_2", type="string", length=200, nullable=true)
+     */
+    private $optionSelection2;
+
+    /**
+     * @var string $optionName3
+     *
+     * @ORM\Column(name="option_name_3", type="string", length=64, nullable=true)
+     */
+    private $optionName3;
+
+    /**
+     * @var string $optionSelection3
+     *
+     * @ORM\Column(name="option_selection_3", type="string", length=200, nullable=true)
+     */
+    private $optionSelection3;
+
+    /**
+     * @var string $optionName4
+     *
+     * @ORM\Column(name="option_name_4", type="string", length=64, nullable=true)
+     */
+    private $optionName4;
+
+    /**
+     * @var string $optionSelection4
+     *
+     * @ORM\Column(name="option_selection_4", type="string", length=200, nullable=true)
+     */
+    private $optionSelection4;
+
+    /**
+     * @var string $optionName5
+     *
+     * @ORM\Column(name="option_name_5", type="string", length=64, nullable=true)
+     */
+    private $optionName5;
+
+    /**
+     * @var string $optionSelection5
+     *
+     * @ORM\Column(name="option_selection_5", type="string", length=200, nullable=true)
+     */
+    private $optionSelection5;
+
+    /**
+     * @var string $optionName6
+     *
+     * @ORM\Column(name="option_name_6", type="string", length=64, nullable=true)
+     */
+    private $optionName6;
+
+    /**
+     * @var string $optionSelection6
+     *
+     * @ORM\Column(name="option_selection_6", type="string", length=200, nullable=true)
+     */
+    private $optionSelection6;
+
+    /**
+     * @var string $optionName7
+     *
+     * @ORM\Column(name="option_name_7", type="string", length=64, nullable=true)
+     */
+    private $optionName7;
+
+    /**
+     * @var string $optionSelection7
+     *
+     * @ORM\Column(name="option_selection_7", type="string", length=200, nullable=true)
+     */
+    private $optionSelection7;
+
+    /**
+     * @var datetime $createdAt
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     */
+    private $createdAt;
+
+    /**
+     * @var datetime $updatedAt
+     *
+     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     */
+    private $updatedAt;
+
+
+}

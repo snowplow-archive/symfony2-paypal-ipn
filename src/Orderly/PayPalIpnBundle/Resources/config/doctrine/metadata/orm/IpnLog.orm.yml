@@ -1,0 +1,57 @@
+IpnLog:
+  type: entity
+  table: ipn_log
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    listenerName:
+      type: string
+      length: 3
+      fixed: false
+      nullable: true
+      column: listener_name
+    transactionType:
+      type: string
+      length: 16
+      fixed: false
+      nullable: true
+      column: transaction_type
+    transactionId:
+      type: string
+      length: 19
+      fixed: false
+      nullable: true
+      column: transaction_id
+    status:
+      type: string
+      length: 16
+      fixed: false
+      nullable: true
+    message:
+      type: string
+      length: 512
+      fixed: false
+      nullable: true
+    ipnDataHash:
+      type: string
+      length: 32
+      fixed: false
+      nullable: true
+      column: ipn_data_hash
+    detail:
+      type: text
+      nullable: true
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+  lifecycleCallbacks: {  }
