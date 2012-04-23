@@ -24,12 +24,12 @@ use Orderly\PayPalIpnBundle\Ipn;
  * limitations under the License.
  */
 
-class DefaultController extends Controller
+class NoNotificationController extends Controller
 {
     
     public $paypal_ipn;
     /**
-     * @Route("/ipn")
+     * @Route("/ipn-no-notification")
      * @Template()
      */
     public function indexAction()
@@ -49,18 +49,14 @@ class DefaultController extends Controller
             // Now let's check what the payment status is and act accordingly
             if ($this->paypal_ipn->getOrderStatus() == Ipn::PAID)
             {
-                
-                $message = \Swift_Message::newInstance()
-                    ->setSubject('Order confirmation')
-                    ->setFrom('support@CHANGEME.com', 'CHANGEME')
-                    ->setTo($this->paypal_ipn->getOrder()->getPayerEmail(), $this->paypal_ipn->getOrder()->getFirstName() .' '. $this->paypal_ipn->getOrder()->getLastName())
-                    ->setBody($this->renderView('OrderlyPayPalIpnBundle:Default:confirmation_email.txt.twig',
-                            // Prepare the variables to populate the email template:
-                            array('order' => $this->paypal_ipn->getOrder(),
-                                  'items' => $this->paypal_ipn->getOrderItems())
-                            ), 'text/html')
-                ;
-                $this->get('mailer')->send($message);
+                /* HEALTH WARNING:
+                 *
+                 * Please note that this PAID block does nothing. In other words, this controller will not respond to a successful order
+                 * with any notification such as email or similar. You will have to identify paid orders by checking your database.
+                 *
+                 * If you want to send email notifications on successful receipt of an order, please see the alternative, Twig template-
+                 * based example controller: TwigEmailNotification.php
+                 */
             }
         }
         else // Just redirect to the root URL

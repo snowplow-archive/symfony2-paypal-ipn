@@ -51,13 +51,14 @@ use Orderly\PayPalIpnBundle\Entity\IpnOrderItems;
  *  - Interpreting PayPal's payment status
  *  - Storing the order and line item in the database
  *
-
  * All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom
  * post-payment workflow (e.g. sending emails) is left as an exercise to the reader.
  *
  * This library is inspired by:
  *  - Ran Aroussi's PayPal_Lib for CodeIgniter, http://aroussi.com/ci/
  *  - Micah Carrick's Paypal PHP class, http://www.micahcarrick.com
+ * 
+ * This library is ported from existing Codeigniter PayPal IPN library available at https://github.com/orderly/codeigniter-paypal-ipn
  *
  */
 
@@ -151,7 +152,6 @@ class Ipn
         // Before doing anything else, let's clean up our post data.
         foreach (array_keys($ipnDataRaw) as $field) {
             if (!$usingCache) {
-                //$value = $this->_sc->input->post($field); // Note that CodeIgniter standardises line returns to \n
                 $value = $request->request->get($field);
                 // Put line feeds back to \r\n for PayPal otherwise multi-line data will be rejected as INVALID
                 $ipnDataRaw[$field] = str_replace("\n", "\r\n", $value);
@@ -309,13 +309,7 @@ class Ipn
         $this->order->setDiscount($totalBeforeDiscount - $this->order->getMcGross());
     }
 
-    // Ugly function to deal with the fact that a lot of people don't have curl or similar setup.
-    // If you do have curl setup in PHP, and @philsturgeon's cURL library for CodeIgniter installed,
-    // you can replace the contents of this function with:
-    // $this->_sc->load->library('curl');
-    // $response = $this->_sc->curl->simple_post($url, $postData);
-    // // Error logging
-    // return $response;
+    //sending data to PayPal IPN service
     function _postData($url, $postData)
     {
         // Put the postData into a string

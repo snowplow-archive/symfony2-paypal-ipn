@@ -26,13 +26,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Bundle should be tested by sending IPN Notyfications messages from PayPal testing tool
  * more on https://developer.paypal.com/us/cgi-bin/devscr
  */
-class DefaultControllerTest extends WebTestCase
+class TwigNotificationEmailControllerTest extends WebTestCase
 {
     public function testIndex()
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/ipn');
+        $crawler = $client->request('GET', '/ipn-twig-email-notification');
 
         $this->assertTrue($crawler->filter('html:contains("OK")')->count() > 0);
     }
