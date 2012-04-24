@@ -1,0 +1,143 @@
+h1. Symfony2-paypal-ipn
+
+h2. Overview
+
+orderly/symfony2-paypal-ipn is a Symfony2 library for working with the PayPal IPN (Instant
+Payment Notification) service. The library acts as a listener for the PayPal IPN service
+and logs the orders to your database using Doctrine. 
+
+h2. Description
+
+PayPal IPN Library
+
+A Symfony2 library to act as a listener for the PayPal Instant Payment Notification
+(IPN) interface. Uses Doctrine 2.0
+
+This library focuses on the "post-payment" workflow, i.e. the processing required once
+the payment has been made and PayPal has posted an Instant Payment Notification call to
+the IPN controller.
+
+This library handles:
+  - Validating the IPN call
+  - Extracting the order and line item information from the IPN call
+  - Interpreting PayPal's payment status
+  - Storing the order and line item in the database
+
+All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom
+post-payment workflow (e.g. sending emails) is left as an exercise to the reader.
+
+h2. Dependencies
+
+Depends on Symfony standard and Doctrine 2
+
+h2. Installation
+
+First copy Orderly/PayPalIpnBundle to Your project "src" directory. The OrderlyPayPalIpnBundle.php file
+should be under "Your Symfony2 root flder"/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
+
+Now bundle should be register. Find "Your Symfony2 root flder"/app/AppKernel.php file 
+and add the following on the end of the $bundles array in "registerBundles()" method:
+
+    "new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()"
+
+To create the MySQL tables required by OrderlyPayPalIpnBundle, run the SQL file "create_mysql_tables.sql" found
+in the @Orderly/PayPalIpnBundle/Resources/config@ folder against your db (RECOMMENDED).
+
+Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console:
+php app/console doctrine:schema:update --force
+
+(NOTE: the second method (using app/console) will not add the table fields comments in Your database etc.)
+
+At the end tell to routing system, where he can find our sample controllers - add the following
+to the app/config/routing.yml file:
+
+
+OrderlyPayPalIpnBundleEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
+    type:     annotation
+    prefix:   /
+
+OrderlyPayPalIpnBundleNoEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
+    type:     annotation
+    prefix:   /
+
+this will import Routes patterns from controllers annotations 
+
+and under the following urls our PayPal IPN service is listen for incomming requests:
+
+"http://example.com/ipn-no-notification"
+
+and 
+
+"http://example.com/ipn-twig-email-notification"
+
+h2. Configuration
+
+// YAML
+orderly_pay_pal_ipn:
+    # Constants for the live environment
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+    # Debugging simply caches the latest PayPal IPN post data into the database, and retrieves it if
+    # validateIPN is called without post data. This is useful for directly trying a validateIPN call from
+    # the controller.
+
+    # Constants for the sandbox environment ; Default settings configured in Configuration.php
+    sandbox_email:   seller@paypalsandbox.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    # islive: if set to false then service loads settings with "sandbox_" prefix
+    islive:          false 
+
+h2. Usage
+
+Example of usage with email notyfication:
+Orderly/PayPalIpnBundle/Controller/TwigNotificationEmailController.php
+
+Example of usage without notyfication
+Orderly/PayPalIpnBundle/Controller/NoNotificationController.php
+
+Controller address with this service should be provided as IPN listener in Your PalPal Account
+
+h2. Credits
+
+This library is ported from existing Codeigniter PayPal IPN library available at https://github.com/orderly/codeigniter-paypal-ipn
+
+h2. Disclaimer and Warning
+
+The author Alex Dean does not accept any liability for any processing errors made by
+symfony2-paypal-ipn, or any financial losses incurred through its use.
+
+In particular, this library does *not* fulfil the PayPal IPN requirement to _"verify that the
+payment amount actually matches what you intend to charge. Although not technically an IPN
+issue, if you do not encrypt buttons, it is possible for someone to capture the original
+transmission and change the price. Without this check, you could accept a lesser payment
+than what you expected."_ (This verification step is out of scope for this library because
+it would require integration with your product catalogue.)
+
+Additionally this library does *not* properly handle refunds. Typically refunds are stored as
+a new order line in @ipn_orders@ with a negative balance, but even this is not 100% predicatable.
+
+
+h2. Copyright
+
+symfony2-paypal-ipn is copyright (c) 2012 Alexander Dean, alex@keplarllp.com
+
+h2. License
+
+Copyright 2012 Orderly Ltd
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
