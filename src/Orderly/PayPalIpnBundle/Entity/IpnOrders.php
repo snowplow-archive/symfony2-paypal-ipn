@@ -662,7 +662,7 @@ class IpnOrders
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = $id;
     }
 
     /**
@@ -722,7 +722,7 @@ class IpnOrders
      */
     public function setTestIpn($testIpn)
     {
-        $this->testIpn = intval($testIpn);
+        $this->testIpn = $testIpn;
     }
 
     /**
@@ -1242,7 +1242,7 @@ class IpnOrders
      */
     public function setTax($tax)
     {
-        $this->tax = floatval($tax);
+        $this->tax = $tax;
     }
 
     /**
@@ -1302,7 +1302,7 @@ class IpnOrders
      */
     public function setAuthAmount($authAmount)
     {
-        $this->authAmount = intval($authAmount);
+        $this->authAmount = $authAmount;
     }
 
     /**
@@ -1342,7 +1342,7 @@ class IpnOrders
      */
     public function setNumCartItems($numCartItems)
     {
-        $this->numCartItems = intval($numCartItems);
+        $this->numCartItems = $numCartItems;
     }
 
     /**
@@ -1482,7 +1482,7 @@ class IpnOrders
      */
     public function setRemainingSettle($remainingSettle)
     {
-        $this->remainingSettle = intval($remainingSettle);
+        $this->remainingSettle = $remainingSettle;
     }
 
     /**
@@ -1522,7 +1522,7 @@ class IpnOrders
      */
     public function setShipping($shipping)
     {
-        $this->shipping = floatval($shipping);
+        $this->shipping = $shipping;
     }
 
     /**
@@ -1602,7 +1602,7 @@ class IpnOrders
      */
     public function setExchangeRate($exchangeRate)
     {
-        $this->exchangeRate = floatval($exchangeRate);
+        $this->exchangeRate = $exchangeRate;
     }
 
     /**
@@ -1642,7 +1642,7 @@ class IpnOrders
      */
     public function setMcFee($mcFee)
     {
-        $this->mcFee = floatval($mcFee);
+        $this->mcFee = $mcFee;
     }
 
     /**
@@ -1662,7 +1662,7 @@ class IpnOrders
      */
     public function setMcGross($mcGross)
     {
-        $this->mcGross = floatval($mcGross);
+        $this->mcGross = $mcGross;
     }
 
     /**
@@ -1682,7 +1682,7 @@ class IpnOrders
      */
     public function setMcHandling($mcHandling)
     {
-        $this->mcHandling = floatval($mcHandling);
+        $this->mcHandling = $mcHandling;
     }
 
     /**
@@ -1702,7 +1702,7 @@ class IpnOrders
      */
     public function setMcShipping($mcShipping)
     {
-        $this->mcShipping = floatval($mcShipping);
+        $this->mcShipping = $mcShipping;
     }
 
     /**
@@ -1722,7 +1722,7 @@ class IpnOrders
      */
     public function setPaymentFee($paymentFee)
     {
-        $this->paymentFee = floatval($paymentFee);
+        $this->paymentFee = $paymentFee;
     }
 
     /**
@@ -1742,7 +1742,7 @@ class IpnOrders
      */
     public function setPaymentGross($paymentGross)
     {
-        $this->paymentGross = floatval($paymentGross);
+        $this->paymentGross = $paymentGross;
     }
 
     /**
@@ -1762,7 +1762,7 @@ class IpnOrders
      */
     public function setSettleAmount($settleAmount)
     {
-        $this->settleAmount = floatval($settleAmount);
+        $this->settleAmount = $settleAmount;
     }
 
     /**
@@ -1842,7 +1842,7 @@ class IpnOrders
      */
     public function setAuctionMultiItem($auctionMultiItem)
     {
-        $this->auctionMultiItem = intval($auctionMultiItem);
+        $this->auctionMultiItem = $auctionMultiItem;
     }
 
     /**
@@ -1982,7 +1982,7 @@ class IpnOrders
      */
     public function setAmount1($amount1)
     {
-        $this->amount1 = floatval($amount1);
+        $this->amount1 = $amount1;
     }
 
     /**
@@ -2002,7 +2002,7 @@ class IpnOrders
      */
     public function setAmount2($amount2)
     {
-        $this->amount2 = $floatval(amount2);
+        $this->amount2 = $amount2;
     }
 
     /**
@@ -2022,7 +2022,7 @@ class IpnOrders
      */
     public function setAmount3($amount3)
     {
-        $this->amount3 = floatval($amount3);
+        $this->amount3 = $amount3;
     }
 
     /**
@@ -2042,7 +2042,7 @@ class IpnOrders
      */
     public function setMcAmount1($mcAmount1)
     {
-        $this->mcAmount1 = floatval($mcAmount1);
+        $this->mcAmount1 = $mcAmount1;
     }
 
     /**
@@ -2062,7 +2062,7 @@ class IpnOrders
      */
     public function setMcAmount2($mcAmount2)
     {
-        $this->mcAmount2 = floatval($mcAmount2);
+        $this->mcAmount2 = $mcAmount2;
     }
 
     /**
@@ -2082,7 +2082,7 @@ class IpnOrders
      */
     public function setMcAmount3($mcAmount3)
     {
-        $this->mcAmount3 = floatval($mcAmount3);
+        $this->mcAmount3 = $mcAmount3;
     }
 
     /**
@@ -2162,7 +2162,7 @@ class IpnOrders
      */
     public function setRecurTimes($recurTimes)
     {
-        $this->recurTimes = intval($recurTimes);
+        $this->recurTimes = $recurTimes;
     }
 
     /**
@@ -2322,7 +2322,7 @@ class IpnOrders
      */
     public function setDiscount($discount)
     {
-        $this->discount = floatval($discount);
+        $this->discount = $discount;
     }
 
     /**
@@ -2342,7 +2342,7 @@ class IpnOrders
      */
     public function setShippingDiscount($shippingDiscount)
     {
-        $this->shippingDiscount = floatval($shippingDiscount);
+        $this->shippingDiscount = $shippingDiscount;
     }
 
     /**

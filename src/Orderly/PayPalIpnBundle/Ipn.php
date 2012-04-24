@@ -247,6 +247,7 @@ class Ipn
     public function extractOrder()
     {
         $this->order = new IpnOrders();
+        
         // First extract the actual order record itself
         foreach ($this->ipnData as $key=>$value) {
             // This is very simple: the order fields are any fields which do not end in a number
@@ -272,11 +273,11 @@ class Ipn
 
         
         $numItems = (int)$this->order->getNumCartItems();
-
+        
         //in sandbox mode $this->order->getNumCartItems() is null so we check if is li
-//        if(!$numItems && !$this->isLive && $this->order->getTxnType() == 'cart' ){
-//            $numItems = 1;
-//        }
+        if(!$numItems && !$this->isLive && $this->order->getTxnType() == 'cart' ){
+            $numItems = 1;
+        }
 
         // Now retrieve the line items which belong to this order
 
@@ -364,8 +365,7 @@ class Ipn
         $em = $this->_sc->get('doctrine')->getEntityManager();
         
         // If we don't already have a cache row,
-        if (!($cache = $em->getRepository('OrderlyPayPalIpnBundle:IpnLog')
-                ->findOneBy(array('listenerName' => 'IPN', 'transactionType' => 'cache')))) {
+        if (!($cache = $em->getRepository('OrderlyPayPalIpnBundle:IpnLog')->findOneBy(array('listenerName' => 'IPN', 'transactionType' => 'cache')))) {
             $cache = new IpnLog(); // Create a new one
             $cache->setListenerName('IPN');
             $cache->setTransactionType('cache');
@@ -386,8 +386,7 @@ class Ipn
     {   
         $em = $this->_sc->get('doctrine')->getEntityManager();
 
-        if (!($cache = $em->getRepository('OrderlyPayPalIpnBundle:IpnLog')
-                ->findOneBy(array('listenerName' => 'IPN', 'transactionType' => 'cache')))) {
+        if (!($cache = $em->getRepository('OrderlyPayPalIpnBundle:IpnLog')->findOneBy(array('listenerName' => 'IPN', 'transactionType' => 'cache')))) {
             return FALSE;
         } else {
             return unserialize($cache->getDetail());
@@ -398,8 +397,7 @@ class Ipn
     // Doctrine version
     function _checkForDuplicates($hash)
     {
-        return $this->_sc->get('doctrine')->getEntityManager()->getRepository('OrderlyPayPalIpnBundle:IpnLog')
-                ->findOneByIpnDataHash($hash);
+        return $this->_sc->get('doctrine')->getEntityManager()->getRepository('OrderlyPayPalIpnBundle:IpnLog')->findOneByIpnDataHash($hash);
     }
 
     // Function to persist the order and the order items to the database.
@@ -411,8 +409,7 @@ class Ipn
         $em = $this->_sc->get('doctrine')->getEntityManager();
 
         // First check if the order needs an insert or an update
-        if (($ipnOrder = $em->getRepository('OrderlyPayPalIpnBundle:ipnOrders')
-                ->findOneByTxnId($this->ipnData['txn_id']))) {
+        if (($ipnOrder = $em->getRepository('OrderlyPayPalIpnBundle:ipnOrders')->findOneByTxnId($this->ipnData['txn_id']))) {
             $this->order->setId($ipnOrder->getId());//Update
             $em->merge($this->order);// Let's save/merge the order down
         } else {
@@ -423,8 +420,7 @@ class Ipn
         // Now let's save the order's line items
         foreach ($this->orderItems as $i => $item) {
             // We need to check if we have already saved this into the database...
-            if (($ipnOrderItem = $em->getRepository('OrderlyPayPalIpnBundle:ipnOrderItems')
-                    ->findOneBy(array('itemName' => $item->getItemName(), 'orderId' => $this->order->getId())))) {
+            if (($ipnOrderItem = $em->getRepository('OrderlyPayPalIpnBundle:ipnOrderItems')->findOneBy(array('itemName' => $item->getItemName(), 'orderId' => $this->order->getId())))) {
                 $this->orderItems[$i]->setId($ipnOrderItem->getId()); //Update
                 $this->orderItems[$i]->setOrderId($this->order->getId()); // set related order
                 $em->merge($this->orderItems[$i]);// Let's save/merge the order down

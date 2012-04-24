@@ -109,7 +109,7 @@ class IpnLog
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = $id;
     }
     
     /**

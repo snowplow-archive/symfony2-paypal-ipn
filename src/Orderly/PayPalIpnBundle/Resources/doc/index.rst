@@ -2,48 +2,14 @@
 Installation
 ============
 
-    First copy Orderly/PayPalIpnBundle to Your project "src" directory. The OrderlyPayPalIpnBundle.php file
-    should be under "Your Symfony2 root flder"/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
-
-    Now bundle should be register. Find "Your Symfony2 root flder"/app/AppKernel.php file 
-    and add the following on the end of the $bundles array in "registerBundles()" method:
-
-    "new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()"
-
-    
     To create the MySQL tables required by OrderlyPayPalIpnBundle, run the SQL file "create_mysql_tables.sql" found
-    in the @Orderly/PayPalIpnBundle/Resources/config@ folder against your db (RECOMMENDED).
+    in the @Orderly/PayPalIpnBundle/Resources/config@ folder against your db.
 
-    Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console:
+    Alternatively You can install tables in database simply type this in your project console:
     php app/console doctrine:schema:update --force
 
-    (NOTE: the second method (using app/console) will not add the table fields comments in Your database etc.)
+    NOTE: the second method (using app/console) will not add the table fields comments in Your database. The first does.
 
-    At the end tell to routing system, where he can find our sample controllers - add the following
-    to the app/config/routing.yml file:
-
-
-OrderlyPayPalIpnBundleEmail:
-    resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
-    type:     annotation
-    prefix:   /
-
-OrderlyPayPalIpnBundleNoEmail:
-    resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
-    type:     annotation
-    prefix:   /
-
-    this will import Routes patterns from controllers annotations 
-
-    and under the following urls our PayPal IPN service is listen for incomming requests:
- 
-    "http://example.com/ipn-no-notification"
-
-    and 
-
-    "http://example.com/ipn-twig-email-notification"
-
-       
 
 Dependencies
 ------------

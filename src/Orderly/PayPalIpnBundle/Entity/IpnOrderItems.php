@@ -221,7 +221,7 @@ class IpnOrderItems
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = $id;
     }
 
     /**
@@ -241,7 +241,7 @@ class IpnOrderItems
      */
     public function setOrderId($orderId)
     {
-        $this->orderId = intval($orderId);
+        $this->orderId = $orderId;
     }
 
     /**
@@ -321,7 +321,7 @@ class IpnOrderItems
      */
     public function setMcGross($mcGross)
     {
-        $this->mcGross = floatval($mcGross);
+        $this->mcGross = $mcGross;
     }
 
     /**
@@ -341,7 +341,7 @@ class IpnOrderItems
      */
     public function setMcHandling($mcHandling)
     {
-        $this->mcHandling = floatval($mcHandling);
+        $this->mcHandling = $mcHandling;
     }
 
     /**
@@ -361,7 +361,7 @@ class IpnOrderItems
      */
     public function setMcShipping($mcShipping)
     {
-        $this->mcShipping = floatval($mcShipping);
+        $this->mcShipping = $mcShipping;
     }
 
     /**
@@ -381,7 +381,7 @@ class IpnOrderItems
      */
     public function setTax($tax)
     {
-        $this->tax = floatval($tax);
+        $this->tax = $tax;
     }
 
     /**
@@ -401,7 +401,7 @@ class IpnOrderItems
      */
     public function setCostPerItem($costPerItem)
     {
-        $this->costPerItem = floatval($costPerItem);
+        $this->costPerItem = $costPerItem;
     }
 
     /**
