@@ -266,42 +266,67 @@ class Ipn
 
         // Let's store the payment status too
         $this->order->setOrderStatus($this->orderStatus);
+        
+        //Updating dates
         if(!$this->order->getCreatedAt())
             $this->order->setCreatedAt(new \DateTime());
         $this->order->setUpdatedAt(new \DateTime());
 
-        
-        $numItems = (int)$this->order->getNumCartItems();
 
         //in sandbox mode $this->order->getNumCartItems() is null so we check if is li
 //        if(!$numItems && !$this->isLive && $this->order->getTxnType() == 'cart' ){
 //            $numItems = 1;
 //        }
-
+//        
         // Now retrieve the line items which belong to this order
+        $hasCart = ($this->order->getTxnType() == 'cart');
+        $numItems = $hasCart ? (int)$this->order->getNumCartItems() : 1;
 
         $totalBeforeDiscount = 0;
         for ($i = 1; $i <= $numItems; $i++) {
+            
+            // Suffixes are different depending on whether there are multiple items (a cart) or not
+            $suffix = $hasCart ? ($i + 1) : '';
+            $suffixUnderscore = $hasCart ? '_' . $suffix : $suffix;
+
             $this->orderItems[$i] = new IpnOrderItems();
-            if(isset($this->ipnData['item_name' . $i]))
-            $this->orderItems[$i]->setItemName($this->ipnData['item_name' . $i]);
-            if(isset($this->ipnData['item_number' . $i]))
-            $this->orderItems[$i]->setItemNumber($this->ipnData['item_number' . $i]);
-            if(isset($this->ipnData['quantity' . $i]))
-            $this->orderItems[$i]->setQuantity($this->ipnData['quantity' . $i]);
-            if(isset($this->ipnData['mc_gross_' . $i]))
-            $this->orderItems[$i]->setMcGross($this->ipnData['mc_gross_' . $i]); // Note the trailing underscore. PayPal oddity
-            if(isset($this->ipnData['mc_handling' . $i]))
-            $this->orderItems[$i]->setMcHandling($this->ipnData['mc_handling' . $i]);
-            if(isset($this->ipnData['mc_shipping' . $i]))
-            $this->orderItems[$i]->setMcShipping($this->ipnData['mc_shipping' . $i]);
-            $this->orderItems[$i]->setTax(isset($this->ipnData['tax' . $i]) ? $this->ipnData['tax' . $i] : null); // Tax is not always set on an item
-            if(isset($this->ipnData['mc_gross_' . $i]) && isset($this->ipnData['quantity' . $i]))
-            $this->orderItems[$i]->setCostPerItem(floatval($this->ipnData['mc_gross_' . $i]) / intval($this->ipnData['quantity' . $i])); // Should be fine because quantity can never be 0
+            if(isset($this->ipnData['item_name' . $suffix]))
+                $this->orderItems[$i]->setItemName($this->ipnData['item_name' . $suffix]);
+            if(isset($this->ipnData['item_number' . $suffix]))
+                $this->orderItems[$i]->setItemNumber($this->ipnData['item_number' . $suffix]);
+            if(isset($this->ipnData['quantity' . $suffix]))
+                $this->orderItems[$i]->setQuantity($this->ipnData['quantity' . $suffix]);
+            if(isset($this->ipnData['mc_gross' . $suffixUnderscore]))
+                $this->orderItems[$i]->setMcGross($this->ipnData['mc_gross' . $suffixUnderscore]);
+            if(isset($this->ipnData['mc_gross' . $suffixUnderscore]) && isset($this->ipnData['quantity' . $suffix]))
+                $this->orderItems[$i]->setCostPerItem(floatval($this->ipnData['mc_gross' . $suffixUnderscore]) / intval($this->ipnData['quantity' . $suffix])); // Should be fine because quantity can never be 0
+            
+            // Update the total before the discount was applied
+            $totalBeforeDiscount +=  $this->orderItems[$i]->getMcGross();
+            
+            if(isset($this->ipnData['mc_handling' . $suffix]))
+                $this->orderItems[$i]->setMcHandling($this->ipnData['mc_handling' . $suffix]);
+            if(isset($this->ipnData['mc_shipping' . $suffix]))
+                $this->orderItems[$i]->setMcShipping($this->ipnData['mc_shipping' . $suffix]);
+            if(isset($this->ipnData['tax' . $suffix]))
+                $this->orderItems[$i]->setTax($this->ipnData['tax' . $suffix]); // Tax is not always set on an item
+                        
+            
+            // Set the order item options if any
+            // $count = 7 because PayPal allows you to set a maximum of 7 options per item
+            // Reference: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables
+            for ($ii = 1, $count = 7; $ii < $count; $ii++)
+            {
+                if(isset($this->ipnData['option_name'.$ii.'_'.$suffix]))
+                    $this->orderItems[$i]->setOptionName.$ii($this->ipnData['option_name'.$ii.'_'.$suffix]);
+                if(isset($this->ipnData['option_selection'.$ii.'_'.$suffix]))
+                    $this->orderItems[$i]->setOptionSelection.$ii($this->ipnData['option_selection'.$ii.'_'.$suffix]);
+            }
+            
+            //Updating dates
             if(!$this->orderItems[$i]->getCreatedAt())
                 $this->orderItems[$i]->setCreatedAt(new \DateTime());
             $this->orderItems[$i]->setUpdatedAt(new \DateTime());
-            $totalBeforeDiscount +=  $this->orderItems[$i]->getMcGross();
         }
 
         // And calculate the discount, as it's useful to add this into emails etc
@@ -468,8 +493,8 @@ class Ipn
             $detailJSON = array();
             $detailJSON['ipn_data'] = $this->ipnData;
             $detailJSON['ipn_response'] = $ipnResponse;
-            //$ipnLog->setDetail(json_encode($detailJSON)); // If we save as json we will not be alble to unserialize it 
-            $ipnLog->setDetail(serialize($detailJSON));
+            $ipnLog->setDetail(json_encode($detailJSON)); // If we save as json we will not be alble to unserialize it 
+            //$ipnLog->setDetail(serialize($detailJSON));
         } else {
             $ipnLog->setDetail(null); // Turn it back to null (as it might have been set previously)
         }
