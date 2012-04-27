@@ -272,12 +272,7 @@ class Ipn
             $this->order->setCreatedAt(new \DateTime());
         $this->order->setUpdatedAt(new \DateTime());
 
-
-        //in sandbox mode $this->order->getNumCartItems() is null so we check if is li
-//        if(!$numItems && !$this->isLive && $this->order->getTxnType() == 'cart' ){
-//            $numItems = 1;
-//        }
-//        
+    
         // Now retrieve the line items which belong to this order
         $hasCart = ($this->order->getTxnType() == 'cart');
         $numItems = $hasCart ? (int)$this->order->getNumCartItems() : 1;
@@ -493,8 +488,7 @@ class Ipn
             $detailJSON = array();
             $detailJSON['ipn_data'] = $this->ipnData;
             $detailJSON['ipn_response'] = $ipnResponse;
-            $ipnLog->setDetail(json_encode($detailJSON)); // If we save as json we will not be alble to unserialize it 
-            //$ipnLog->setDetail(serialize($detailJSON));
+            $ipnLog->setDetail(json_encode($detailJSON));
         } else {
             $ipnLog->setDetail(null); // Turn it back to null (as it might have been set previously)
         }
