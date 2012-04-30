@@ -344,7 +344,7 @@ class Ipn
         $ipnURL = ($parsedURL['scheme'] == "https") ? "ssl://" . $parsedURL['host'] : $parsedURL['host'];
         // Likewise, if using ssl, then need to change port from 80 to 443
         $ipnPort = ($parsedURL['scheme'] == "https") ? 443 : 80;
-        $fp = fsockopen($ipnURL, $ipnPort, $errorNumber, $errorString, 30);
+        $fp = @fsockopen($ipnURL, $ipnPort, $errorNumber, $errorString, 30);
 
         // Log and return if we have an error
         if (!$fp) {
