@@ -301,17 +301,4 @@ class IpnLog
     {
         return $this->updatedAt;
     }
-    
-    public function setCreatedAtValue()
-    {
-        if(!$this->getCreatedAt())
-        {
-            $this->created_at = new \DateTime();
-        }
-    }
-
-    public function setUpdatedAtValue()
-    {
-        $this->updated_at = new \DateTime();
-    }
 }

@@ -24,6 +24,9 @@ use Orderly\PayPalIpnBundle\Ipn;
  * limitations under the License.
  */
 
+/**
+ *  Sample listener controller for IPN messages with twig email notification
+ */
 class TwigNotificationEmailController extends Controller
 {
     

@@ -86,7 +86,10 @@ class Ipn
     const WAITING = 'WAITING';
     const REJECTED = 'REJECTED';
 
-    // The constructor. Loads the helpers and configuration files, sets the configuration constants
+    /** The constructor. Loads the helpers and configuration files, sets the configuration constants
+     *
+     * @param DI\ContainerInterface $container 
+     */
     function __construct(DI\ContainerInterface $container)
     {
         $this->_sc =& $container;
@@ -98,16 +101,20 @@ class Ipn
         $this->isLive = $this->_sc->getParameter('orderly.paypalipn.islive');
     }
 
-    // The key functionality in this library. Extracts the fields from the IPN notification and then
-    // sends them back to PayPal to make sure that the post is not bogus.
-    // We also carry out the following validations as per PayPal's guidelines (https://cms.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=developer/e_howto_admin_IPNIntro):
-    // - "Verify that you are the intended recipient of the IPN message by checking the email address in the message;
-    //    this handles a situation where another merchant could accidentally or intentionally attempt to use your listener."
-    // - "Avoid duplicate IPN messages. Check that you have not already processed the transaction identified by the transaction
-    //    ID returned in the IPN message. You may need to store transaction IDs returned by IPN messages in a file or database so
-    //    that you can check for duplicates. If the transaction ID sent by PayPal is a duplicate, you should not process it again."
-    //    Actually PayPal is wrong on this last one - duplicate transaction IDs are fine, PayPal can send multiple different
-    //    messages with the same transaction ID. That's why we store the md5 instead.
+    /**
+     * The key functionality in this library. Extracts the fields from the IPN notification and then
+     * sends them back to PayPal to make sure that the post is not bogus.
+     * We also carry out the following validations as per PayPal's guidelines (https://cms.paypal.com/cgi-bin/marketingweb?cmd=_render-content&content_ID=developer/e_howto_admin_IPNIntro):
+     * - "Verify that you are the intended recipient of the IPN message by checking the email address in the message;
+     *    this handles a situation where another merchant could accidentally or intentionally attempt to use your listener."
+     * - "Avoid duplicate IPN messages. Check that you have not already processed the transaction identified by the transaction
+     *    ID returned in the IPN message. You may need to store transaction IDs returned by IPN messages in a file or database so
+     *    that you can check for duplicates. If the transaction ID sent by PayPal is a duplicate, you should not process it again."
+     *    Actually PayPal is wrong on this last one - duplicate transaction IDs are fine, PayPal can send multiple different
+     *    messages with the same transaction ID. That's why we store the md5 instead. 
+     * 
+     * @return bool
+     */
     public function validateIPN()
     {
         // Set these all to null
@@ -243,7 +250,9 @@ class Ipn
         return true;
     }
 
-    // Function to extract the order and order items from the $ipnData
+    /**
+     *  Function to extract the order and order items from the $ipnData
+     */
     public function extractOrder()
     {
         $this->order = new IpnOrders();
@@ -328,7 +337,14 @@ class Ipn
         $this->order->setDiscount($totalBeforeDiscount - $this->order->getMcGross());
     }
 
-    //sending data to PayPal IPN service
+    /**
+     * sending data to PayPal IPN service
+     * 
+     * @param string $url
+     * @param array $postData
+     * 
+     * @return string
+     */
     function _postData($url, $postData)
     {
         // Put the postData into a string
@@ -375,10 +391,12 @@ class Ipn
         return $response;
     }
 
-    /* Code below this point is all ORM-specific. In this version, it is dependent on Doctrine 2 */
-
-    // Save an IPN record (insert/update depending on if there is an existing row or not)
-    // Doctrine version 2
+    /** 
+     * Code below this point is all ORM-specific. In this version, it is dependent on Doctrine 2 
+     * Save an IPN record (insert/update depending on if there is an existing row or not)
+     * 
+     * @param array $ipnDataRaw
+     */
     function _cacheIPN($ipnDataRaw)
     {
         $em = $this->_sc->get('doctrine')->getEntityManager();
@@ -400,8 +418,11 @@ class Ipn
         $em->flush();
     }
 
-    // Retrieve the cached IPN record if there is one, false if there isn't
-    // Doctrine version
+    /**
+     * Retrieve the cached IPN record if there is one, false if there isn't
+     * 
+     * @return array
+     */
     function _getCachedIPN()
     {   
         $em = $this->_sc->get('doctrine')->getEntityManager();
@@ -414,18 +435,23 @@ class Ipn
         }
     }
 
-    // Check for a duplicate IPN call using the md5 hash
-    // Doctrine version
+    /**
+     *  Check for a duplicate IPN call using the md5 hash
+     * 
+     * @param string $hash
+     * @return IpnLog
+     */
     function _checkForDuplicates($hash)
     {
         return $this->_sc->get('doctrine')->getEntityManager()->getRepository('OrderlyPayPalIpnBundle:IpnLog')
                 ->findOneByIpnDataHash($hash);
     }
 
-    // Function to persist the order and the order items to the database.
-    // Note is that an order may already exist in the system, and this IPN
-    // call is just to update the record - e.g. changing its payment status.
-    // Doctrine version
+    /**
+     * Function to persist the order and the order items to the database.
+     * Note is that an order may already exist in the system, and this IPN
+     * call is just to update the record - e.g. changing its payment status.
+     */
     public function saveOrder()
     {
         $em = $this->_sc->get('doctrine')->getEntityManager();
@@ -457,11 +483,17 @@ class Ipn
         $em->flush();
     }
 
-    // The transaction logger. Currently tracks:
-    // - Successful and failed calls by the PayPal IPN
-    // - Successful and failed calls by one or more third-party APIs
-    // - (In sandbox mode) Caches the last transaction fields so we can run the IPN script directly
-    // Doctrine version
+    /** The transaction logger. Currently tracks:
+     *
+     * - Successful and failed calls by the PayPal IPN
+     * - Successful and failed calls by one or more third-party APIs
+     * - (In sandbox mode) Caches the last transaction fields so we can run the IPN script directly
+     *  
+     * @param string $listenerName
+     * @param string $transactionStatus
+     * @param string $transactionMessage
+     * @param string $ipnResponse
+     */
     function _logTransaction($listenerName, $transactionStatus, $transactionMessage, $ipnResponse = null)
     {
         // Store the standard log information

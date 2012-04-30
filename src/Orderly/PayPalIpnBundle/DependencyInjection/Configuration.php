@@ -21,6 +21,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * limitations under the License.
  */
 
+/**
+ *  Setting config validators 
+ */
 class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()

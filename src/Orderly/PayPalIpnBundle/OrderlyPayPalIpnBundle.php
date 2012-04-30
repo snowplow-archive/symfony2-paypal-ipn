@@ -20,6 +20,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  * limitations under the License.
  */
 
+/**
+ *  Bundle main class 
+ */
 class OrderlyPayPalIpnBundle extends Bundle
 {
     public function boot()

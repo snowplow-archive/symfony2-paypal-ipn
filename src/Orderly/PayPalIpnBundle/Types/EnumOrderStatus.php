@@ -17,6 +17,9 @@ namespace Orderly\PayPalIpnBundle\Types;
  * limitations under the License.
  */
 
+/**
+ *  Declare new datatype 
+ */
 class EnumOrderStatus extends EnumType
 {
     protected $name = 'enumorderstatus';

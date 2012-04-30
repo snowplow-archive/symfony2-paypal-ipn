@@ -24,6 +24,9 @@ use Orderly\PayPalIpnBundle\Ipn;
  * limitations under the License.
  */
 
+/**
+ *  Sample listener controller for IPN messages
+ */
 class NoNotificationController extends Controller
 {
     

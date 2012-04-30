@@ -23,6 +23,13 @@ use Symfony\Component\DependencyInjection\Loader;
  * limitations under the License.
  */
 
+/**
+ *  Setting container parameters
+ * 
+ * @param array $configs 
+ * @param ContainerBuilder $container
+ * 
+ */
 class OrderlyPayPalIpnExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container)

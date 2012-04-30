@@ -20,6 +20,9 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
  * limitations under the License.
  */
 
+/**
+ *  Declare new datatype (base class) 
+ */
 abstract class EnumType extends Type
 {
     protected $name;
