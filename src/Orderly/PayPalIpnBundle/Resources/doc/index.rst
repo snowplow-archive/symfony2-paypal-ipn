@@ -3,22 +3,28 @@ Installation
 ============
 
 First copy Orderly/PayPalIpnBundle to Your project "src" directory. The OrderlyPayPalIpnBundle.php file
-should be under ::
+should be under
+::
     "Your Symfony2 root flder"/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
 
-Now bundle should be register. Find ::
+Now bundle should be register. Find
+::
     "Your Symfony2 root flder"/app/AppKernel.php
-file and add the following on the end of the $bundles array in "registerBundles()" method: ::
 
+file and add the following on the end of the $bundles array in "registerBundles()" method
+::
     new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()
 
     
 To create the MySQL tables required by OrderlyPayPalIpnBundle, run the SQL file "create_mysql_tables.sql" found
-in the ::
+in the
+::
     Orderly/PayPalIpnBundle/Resources/config
+
 folder against your db (RECOMMENDED).
 
-Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console: ::
+Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console
+::
     php app/console doctrine:schema:update --force
 
 (NOTE: the second method (using app/console) will not add the table fields comments in Your database etc.)
@@ -80,10 +86,12 @@ Configuration
 Usage
 =====
 
-Example of usage with email notyfication: ::
+Example of usage with email notyfication:
+::
     Orderly/PayPalIpnBundle/Controller/TwigNotificationEmailController.php
 
-Example of usage without notyfication: ::
+Example of usage without notyfication:
+::
     Orderly/PayPalIpnBundle/Controller/NoNotificationController.php
 
 Controller address with this service should be provided as IPN listener in Your PalPal Account
