@@ -47,12 +47,11 @@ to the app/config/routing.yml file:
 
 This will import Routes patterns from controllers annotations 
 
-and under the following urls our PayPal IPN service is listen for incomming requests:
-
+and under the following urls our PayPal IPN service is listen for incomming requests
 ::
-    "http://example.com/ipn-no-notification"
+    http://example.com/ipn-no-notification
 
-    "http://example.com/ipn-twig-email-notification"
+    http://example.com/ipn-twig-email-notification
 
        
 
