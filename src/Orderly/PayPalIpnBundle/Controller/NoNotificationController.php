@@ -58,20 +58,16 @@ class NoNotificationController extends Controller
                  * based example controller: TwigEmailNotification.php
                  */
             }
+            
         }
         else // Just redirect to the root URL
         {
-            $this->redirect('/');
+            return $this->redirect('/');
         }
 
-        
         $response = new Response();
-
-        $response->setContent('<html><body><h1>OK!</h1></body></html>');
         $response->setStatusCode(200);
-        $response->headers->set('Content-Type', 'text/html');
-
-        return $response;
         
+        return $response;
     }
 }

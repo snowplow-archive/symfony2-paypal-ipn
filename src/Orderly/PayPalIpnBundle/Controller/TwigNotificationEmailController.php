@@ -52,7 +52,7 @@ class TwigNotificationEmailController extends Controller
                 //preparing message
                 $message = \Swift_Message::newInstance()
                     ->setSubject('Order confirmation')
-                    ->setFrom('support@CHANGEME.com', 'CHANGEME')
+                    ->setFrom('support@CHANGEME.com', 'TEST')
                     ->setTo($this->paypal_ipn->getOrder()->getPayerEmail(), $this->paypal_ipn->getOrder()->getFirstName() .' '. $this->paypal_ipn->getOrder()->getLastName())
                     ->setBody($this->renderView('OrderlyPayPalIpnBundle:Default:confirmation_email.txt.twig',
                             // Prepare the variables to populate the email template:
@@ -66,17 +66,12 @@ class TwigNotificationEmailController extends Controller
         }
         else // Just redirect to the root URL
         {
-            $this->redirect('/');
+            return $this->redirect('/');
         }
 
-        
         $response = new Response();
-
-        $response->setContent('<html><body><h1>OK!</h1></body></html>');
         $response->setStatusCode(200);
-        $response->headers->set('Content-Type', 'text/html');
-
-        return $response;
         
+        return $response;
     }
 }
