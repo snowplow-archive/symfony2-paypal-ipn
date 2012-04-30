@@ -2,25 +2,29 @@
 Installation
 ============
 
-    First copy @Orderly/PayPalIpnBundle@ to Your project "@src@" directory. The @OrderlyPayPalIpnBundle.php@ file
-    should be under @"Your Symfony2 root flder"/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php@
+First copy Orderly/PayPalIpnBundle to Your project "src" directory. The OrderlyPayPalIpnBundle.php file
+should be under ::
+    "Your Symfony2 root flder"/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
 
-    Now bundle should be register. Find @"Your Symfony2 root folder"/app/AppKernel.php@ file 
-    and add the following on the end of the $bundles array in @registerBundles()@ method:
+Now bundle should be register. Find ::
+    "Your Symfony2 root flder"/app/AppKernel.php
+file and add the following on the end of the $bundles array in "registerBundles()" method: ::
 
-    @new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()@
+    new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()
 
     
-    To create the MySQL tables required by OrderlyPayPalIpnBundle, run the SQL file @create_mysql_tables.sql@ found
-    in the @Orderly/PayPalIpnBundle/Resources/config@ folder against your db (RECOMMENDED).
+To create the MySQL tables required by OrderlyPayPalIpnBundle, run the SQL file "create_mysql_tables.sql" found
+in the ::
+    Orderly/PayPalIpnBundle/Resources/config
+folder against your db (RECOMMENDED).
 
-    Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console:
-    @php app/console doctrine:schema:update --force@
+Alternatively (NOT RECOMMENDED) You can install tables in database simply type this in your project console: ::
+    php app/console doctrine:schema:update --force
 
-    (NOTE: the second method (using app/console) will not add the table fields comments in Your database etc.)
+(NOTE: the second method (using app/console) will not add the table fields comments in Your database etc.)
 
-    At the end tell to routing system, where he can find our sample controllers - add the following
-    to the @app/config/routing.yml@ file:
+At the end tell to routing system, where he can find our sample controllers - add the following
+to the app/config/routing.yml file:
 
 ::
 
@@ -35,16 +39,14 @@ Installation
         type:     annotation
         prefix:   /
 
+This will import Routes patterns from controllers annotations 
 
-    this will import Routes patterns from controllers annotations 
+and under the following urls our PayPal IPN service is listen for incomming requests:
 
-    and under the following urls our PayPal IPN service is listen for incomming requests:
- 
-    @http://example.com/ipn-no-notification@
+::
+    "http://example.com/ipn-no-notification"
 
-    and 
-
-    @http://example.com/ipn-twig-email-notification@
+    "http://example.com/ipn-twig-email-notification"
 
        
 
@@ -78,10 +80,10 @@ Configuration
 Usage
 =====
 
-Example of usage with email notyfication:
-@Orderly/PayPalIpnBundle/Controller/TwigNotificationEmailController.php@
+Example of usage with email notyfication: ::
+    Orderly/PayPalIpnBundle/Controller/TwigNotificationEmailController.php
 
-Example of usage without notyfication
-@Orderly/PayPalIpnBundle/Controller/NoNotificationController.php@
+Example of usage without notyfication: ::
+    Orderly/PayPalIpnBundle/Controller/NoNotificationController.php
 
 Controller address with this service should be provided as IPN listener in Your PalPal Account
