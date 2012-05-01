@@ -126,7 +126,7 @@ For support requests, please email [Orderly Ltd] [orderlyemail] or better still 
 
 This library is a port of the [Codeigniter PayPal IPN library] [codeigniterpaypalipn] written by [Alex Dean] [alexdean].
 
-The contributors to symfony2-paypal-ipn are as follows:
+The credits for symfony2-paypal-ipn are as follows:
 
 * Author: [Kemor] [kemor]
 * Contributor: [Strife] [strife]
