@@ -70,7 +70,7 @@ following file:
 
 #### To send order confirmations with Twig
 
-Then, assuming you want to send order confirmation emails using Twig, add in this controller:
+Then, assuming you want to send order confirmation emails using [Twig] [twig], add in this controller:
 
     OrderlyPayPalIpnBundleEmail:
         resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
@@ -81,7 +81,7 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 
     http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
 
-#### To log orders but send no notifications
+#### To log orders but not send notifications
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add
 in this controller:
@@ -120,11 +120,11 @@ orderly_pay_pal_ipn:
 
 ## Support
 
-For support requests, please contact [Orderly Ltd] [orderlyemail] or raise a [GitHub issue] [newissue].
+For support requests, please email [Orderly Ltd] [orderlyemail] or better still raise a [GitHub issue] [newissue].
 
 ## Credits
 
-This library is a port from the [Codeigniter PayPal IPN library] [codeigniterpaypalipn] written by [Alex Dean] [alexdean].
+This library is a port of the [Codeigniter PayPal IPN library] [codeigniterpaypalipn] written by [Alex Dean] [alexdean].
 
 The contributors to symfony2-paypal-ipn are as follows:
 
@@ -147,7 +147,7 @@ In particular, this library does *not* fulfil the PayPal IPN requirement to:
 (This verification step is out of scope for this bundle because it would require integration with
 your product catalogue.)
 
-Additionally this library does *not* properly handle refunds. Typically refunds are stored as
+Additionally this library does **not** properly handle refunds. Typically refunds are stored as
 a new order line in `ipn_orders` with a negative balance, but even this is not 100% predicatable.
 
 ## Copyright
@@ -158,7 +158,7 @@ symfony2-paypal-ipn is copyright (c) 2012 Orderly Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+You may obtain a copy of the License at:
 
 http://www.apache.org/licenses/LICENSE-2.0
 
