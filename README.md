@@ -22,8 +22,8 @@ This library handles:
 * Storing the order and line items in the database
 
 All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g.
-sending emails) is left as an exercise for the reader. For a much more general-purpose PayPal toolkit for Symfony2, please
-see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
+sending emails) is left as an exercise for the reader. If you prefer a more general-purpose PayPal toolkit for Symfony2,
+please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
