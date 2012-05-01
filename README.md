@@ -27,7 +27,9 @@ see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], the popular and modern PHP framework and [Doctrine 2.0] [doctrine2.0] the ORM. An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], the popular and modern PHP framework and [Doctrine 2.0] [doctrine2.0] the ORM.
+
+An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
 
 ## Installation
 
@@ -61,10 +63,12 @@ Note that this second method does **not** copy across the table field comments f
 
 ### 4. Setup routing (suggested fourth step)
 
-To tell the Symfony2 routing system where to find one of our sample controllers, first open up the
+To tell Symfony's routing system where to find one of our sample controllers, first open up the
 following file:
 
     {{YOUR SYMFONY APP}}/app/config/routing.yml
+
+#### To send order confirmations with Twig
 
 Then, assuming you want to send order confirmation emails using Twig, add in this controller:
 
@@ -76,6 +80,8 @@ Then, assuming you want to send order confirmation emails using Twig, add in thi
 Your site will now be listening for incoming Instant Payment Notifications on the URL:
 
     http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
+
+#### To log orders but send no notifications
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add
 in this controller:
