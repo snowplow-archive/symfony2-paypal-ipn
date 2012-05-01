@@ -36,11 +36,11 @@ The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], the popular and 
 First copy the `src/Orderly` folder from this repository to within your project's own `src` folder. The
 `OrderlyPayPalIpnBundle.php` file should now be available here: 
 
-    [[Your Symfony2 root]]/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
+    {{YOUR SYMFONY APP}}/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
 
 Next, we need to register the new bundle. So, edit your `AppKernel.php` file:
 
-    [[Your Symfony2 root]]/app/AppKernel.php 
+    {{YOUR SYMFONY APP}}/app/AppKernel.php 
 
 and add the following line to the end of the `$bundles` array in the `registerBundles()` method:
 
@@ -64,9 +64,9 @@ Note that this second method does **not** copy across the table field comments f
 To tell the Symfony2 routing system where to find one of our sample controllers, first open up the
 following file:
 
-    [[Your Symfony2 root]]/app/config/routing.yml
+    {{YOUR SYMFONY APP}}/app/config/routing.yml
 
-If you want to send order confirmation emails using Twig, then add in this controller:
+Then, assuming you want to send order confirmation emails using Twig, add in this controller:
 
     OrderlyPayPalIpnBundleEmail:
         resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
@@ -75,7 +75,7 @@ If you want to send order confirmation emails using Twig, then add in this contr
 
 Your site will now be listening for incoming Instant Payment Notifications on the URL:
 
-    http://[[Your domain]]/ipn/ipn-twig-email-notification
+    http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add
 in this controller:
@@ -87,7 +87,7 @@ in this controller:
 
 Your site will now be listening for incoming IPNs on:
 
-    http://[[Your domain]]/ipn/ipn-no-notification
+    http://{{YOUR DOMAIN}}/ipn/ipn-no-notification
 
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
 sample files with your own business logic before putting this bundle into production.**
