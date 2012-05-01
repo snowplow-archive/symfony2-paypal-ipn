@@ -10,7 +10,7 @@ The bundle acts as a listener for the PayPal IPN service and logs the incoming o
 symfony2-paypal-ipn is a near-direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users. symfony2-paypal-ipn acts as a listener for the PayPal Instant Payment Notification (IPN) interface, and
 uses Doctrine 2.0 to log the received orders to your database.
 
-This library (bundle in Symfony2 language) focuses on the "post-payment" workflow, i.e. the processing required once the
+This library ("bundle" in Symfony language) focuses on the "post-payment" workflow, i.e. the processing required once the
 payment has been made and PayPal has posted an Instant Payment Notification call to the IPN controller.
 
 This library handles:
@@ -27,35 +27,35 @@ see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on the PHP framework [Symfony2] [symfony2] and [Doctrine 2.0] [doctrine2.0]. An example order confirmation email built in the [Twig] [twig] templating language is also provided. 
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], the popular and modern PHP framework and [Doctrine 2.0] [doctrine2.0] the ORM. An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
 
 ## Installation
 
 ### 1. Install and register the bundle
 
-First copy `src/Orderly` from this repository to your project's own `src` directory. The `OrderlyPayPalIpnBundle.php` file
-should now be available here: 
+First copy the `src/Orderly` folder from this repository to within your project's own `src` folder. The
+`OrderlyPayPalIpnBundle.php` file should now be available here: 
 
     [[Your Symfony2 root]]/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
 
-Next, we need to register the new bundle. So edit your `AppKernel.php` file:
+Next, we need to register the new bundle. So, edit your `AppKernel.php` file:
 
     [[Your Symfony2 root]]/app/AppKernel.php 
 
-and add the following to the end of the `$bundles` array in the `registerBundles()` method:
+and add the following line to the end of the `$bundles` array in the `registerBundles()` method:
 
     new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()
 
 ### 2. Deploy the database tables
 
-To create the MySQL tables required by PayPalIpnBundle, the **recommended** approach is to run the
-`create_mysql_tables.sql` SQL file against your database. You can find the file here:
+To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the
+`create_mysql_tables.sql` MySQL file against your database. You can find the file here:
 
     `src/Orderly/PayPalIpnBundle/Resources/config`
 
-The alternative approach is to install the tables by type the following in your project console:
+The alternative approach is to install the tables by typing the following into your project console:
 
-    php app/console doctrine:schema:update --force
+    $ php app/console doctrine:schema:update --force
 
 Note that this second method does **not** copy across the table field comments found in the SQL file. 
 
