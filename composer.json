@@ -1,7 +1,7 @@
 {
-    "name": "orderly/paypalipn-bundle",
+    "name": "orderly/paypal-ipn-bundle",
     "type": "symfony-bundle",
-    "description": "PayPal IPN messages listener",
+    "description": "A bundle for retrieving and logging PayPal Instant Payment Notifications (PayPal IPNs)",
     "keywords": ["payment", "paypal", "ipn"],
     "homepage": "https://github.com/orderly/symfony2-paypal-ipn",
     "license": "Apache2",
