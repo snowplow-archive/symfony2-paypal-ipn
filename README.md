@@ -69,7 +69,7 @@ Now we need to configure the bundle. Add the below into your Symfony2 YAML confi
     orderly_paypal_ipn:
 
         # If set to false then service loads settings with "sandbox_" prefix
-        islive:          false 
+        islive:  false 
 
         # Constants for the live environment (default settings in Configuration.php)
         email:   sales@CHANGEME.com
