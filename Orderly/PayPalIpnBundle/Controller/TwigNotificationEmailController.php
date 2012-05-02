@@ -38,7 +38,7 @@ class TwigNotificationEmailController extends Controller
     public function indexAction()
     {
         //getting ipn service registered in container
-        $this->paypal_ipn = $this->get('orderly_pay_pal_ipn');
+        $this->paypal_ipn = $this->get('orderly_paypal_ipn');
         
         //validate ipn (generating response on PayPal IPN request)
         if ($this->paypal_ipn->validateIPN())
@@ -57,7 +57,7 @@ class TwigNotificationEmailController extends Controller
                     ->setSubject('Order confirmation')
                     ->setFrom('support@CHANGEME.com', 'TEST')
                     ->setTo($this->paypal_ipn->getOrder()->getPayerEmail(), $this->paypal_ipn->getOrder()->getFirstName() .' '. $this->paypal_ipn->getOrder()->getLastName())
-                    ->setBody($this->renderView('OrderlyPayPalIpnBundle:Default:confirmation_email.txt.twig',
+                    ->setBody($this->renderView('OrderlyPayPalIpnBundle:Default:confirmation_email.html.twig',
                             // Prepare the variables to populate the email template:
                             array('order' => $this->paypal_ipn->getOrder(),
                                   'items' => $this->paypal_ipn->getOrderItems())

@@ -7,8 +7,7 @@ The bundle acts as a listener for the PayPal IPN service and logs the incoming o
 
 ## Description
 
-symfony2-paypal-ipn is a near-direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users. symfony2-paypal-ipn acts as a listener for the PayPal Instant Payment Notification (IPN) interface, and
-uses Doctrine 2.0 to log the received orders to your database.
+symfony2-paypal-ipn is a near-direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users.
 
 This library ("bundle" in Symfony language) focuses on the "post-payment" workflow, i.e. the processing required once the
 payment has been made and PayPal has posted an Instant Payment Notification call to the IPN controller.
@@ -27,7 +26,7 @@ please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], the popular and modern PHP framework and [Doctrine 2.0] [doctrine2.0] the ORM.
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2.0] [doctrine2.0].
 
 An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
 
@@ -55,13 +54,15 @@ To create the MySQL tables required by PayPalIpnBundle, the **recommended approa
 
     `Orderly/PayPalIpnBundle/Resources/config`
 
-The alternative approach is to install the tables by typing the following into your project console:
+The alternative approach is to install the tables with the following command in your project console:
 
     $ php app/console doctrine:schema:update --force
 
 Note that this second method does **not** copy across the table field comments found in the SQL file. 
 
-### 4. Setup routing (suggested fourth step)
+###
+
+### 4. Setup routing (optional but recommended)
 
 To tell Symfony's routing system where to find one of our sample controllers, first open up the
 following file:

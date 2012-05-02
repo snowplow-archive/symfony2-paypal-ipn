@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="orderly_pay_pal_ipn.class">Orderly\PayPalIpnBundle\Ipn</parameter>
+        <parameter key="orderly_paypal_ipn.class">Orderly\PayPalIpnBundle\Ipn</parameter>
     </parameters>
 
     <services>
-        <service id="orderly_pay_pal_ipn" class="%orderly_pay_pal_ipn.class%">
+        <service id="orderly_paypal_ipn" class="%orderly_paypal_ipn.class%">
             <argument type="service" id="service_container" />
         </service>
     </services>
