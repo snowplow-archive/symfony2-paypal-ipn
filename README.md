@@ -62,25 +62,31 @@ Note that this second method does **not** copy across the table field comments f
 
 ### 3. Configure
 
-Now we need to configure the bundle.
+Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file:
 
-bc.. // YAML
-orderly_pay_pal_ipn:
-    # Constants for the live environment
-    email:   sales@CHANGEME.com
-    url:     https://www.paypal.com/cgi-bin/webscr
-    debug:   %kernel.debug%
-    # Debugging simply caches the latest PayPal IPN post data into the database, and retrieves it if
-    # validateIPN is called without post data. This is useful for directly trying a validateIPN call from
-    # the controller.
+    // YAML
+    orderly_paypal_ipn:
 
-    # Constants for the sandbox environment ; Default settings configured in Configuration.php
-    sandbox_email:   seller@paypalsandbox.com
-    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_debug:   true
+        # islive: if set to false then service loads settings with "sandbox_" prefix
+        islive:          false 
 
-    # islive: if set to false then service loads settings with "sandbox_" prefix
-    islive:          false 
+        # Constants for the live environment
+        email:   sales@CHANGEME.com
+        url:     https://www.paypal.com/cgi-bin/webscr
+        debug:   %kernel.debug%
+
+
+        # Constants for the sandbox environment ; Default settings configured in Configuration.php
+        sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+        sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+        sandbox_debug:   true
+
+Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
+
+A note on the **`debug`** setting: if set to true, then PayPalIpnBundle will store the last IPN access which had
+IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it
+reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the
+`validateIPN()` IPN handler is doing.
 
 ### 4. Setup routing (optional but recommended)
 
@@ -102,6 +108,8 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 
     http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
 
+Don't forget to tell PayPal about your new PayPal IPN URL.
+
 #### To log orders but not send notifications
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add
@@ -116,12 +124,29 @@ Your site will now be listening for incoming IPNs on:
 
     http://{{YOUR DOMAIN}}/ipn/ipn-no-notification
 
+Don't forget to tell PayPal about your new PayPal IPN URL.
+
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
 sample files with your own business logic before putting this bundle into production.**
 
-### 5. Testing
+### 5. Testing and troubleshooting
 
-This section to come.
+Now it's time to test. First, make sure that `islive` is set to false, and `sandbox_debug` is set to true.
+
+Once debugging is switched on, this is how you test:
+
+* Run through your checkout process as normal, making your PayPal sandbox payment etc
+* PayPal will send the IPN POST data to your new PayPal IPN URL
+* Check the PayPal IPN history for success or failure (e.g. HTTP status code 500)
+* Check you received the order confirmation email (if you're sending one)
+* Check that the order and line items are stored in your database
+
+If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser
+and see what happens (for example a PHP/Symfony error, or perhaps a database or Twig not found error). This works
+because of the debug "replay" functionality explained in step 3 above.
+
+* Fix the bug
+* Repeat
 
 ## Support
 
