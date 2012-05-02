@@ -1,5 +1,5 @@
 {
-    "name": "orderly/paypalipn-bundle",
+    "name": "orderly/paypal-ipn-bundle",
     "type": "symfony-bundle",
     "description": "PayPal IPN messages listener",
     "keywords": ["payment", "paypal", "ipn"],
