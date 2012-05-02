@@ -129,7 +129,7 @@ Don't forget to tell PayPal about your new PayPal IPN URL.
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
 sample files with your own business logic before putting this bundle into production.**
 
-### 5. Testing and troubleshooting
+### 5. Test and troubleshoot
 
 Now it's time to test. First, make sure that `islive` is set to false, and `sandbox_debug` is set to true.
 
