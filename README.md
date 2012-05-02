@@ -35,7 +35,7 @@ An example order confirmation email built using the [Twig] [twig] templating lan
 
 ### 1. Install and register the bundle
 
-First copy the `src/Orderly` folder from this repository to within your project's own `src` folder. The
+First copy the `Orderly` folder from this repository to within your project's own `src` folder. The
 `OrderlyPayPalIpnBundle.php` file should now be available here: 
 
     {{YOUR SYMFONY APP}}/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
@@ -53,7 +53,7 @@ and add the following line to the end of the `$bundles` array in the `registerBu
 To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the
 `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
 
-    `src/Orderly/PayPalIpnBundle/Resources/config`
+    `Orderly/PayPalIpnBundle/Resources/config`
 
 The alternative approach is to install the tables by typing the following into your project console:
 
