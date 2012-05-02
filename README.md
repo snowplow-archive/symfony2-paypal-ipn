@@ -60,7 +60,27 @@ The alternative approach is to install the tables with the following command in 
 
 Note that this second method does **not** copy across the table field comments found in the SQL file. 
 
-###
+### 3. Configure
+
+Now we need to configure the bundle.
+
+bc.. // YAML
+orderly_pay_pal_ipn:
+    # Constants for the live environment
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+    # Debugging simply caches the latest PayPal IPN post data into the database, and retrieves it if
+    # validateIPN is called without post data. This is useful for directly trying a validateIPN call from
+    # the controller.
+
+    # Constants for the sandbox environment ; Default settings configured in Configuration.php
+    sandbox_email:   seller@paypalsandbox.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    # islive: if set to false then service loads settings with "sandbox_" prefix
+    islive:          false 
 
 ### 4. Setup routing (optional but recommended)
 
@@ -99,25 +119,9 @@ Your site will now be listening for incoming IPNs on:
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
 sample files with your own business logic before putting this bundle into production.**
 
-h2. Configuration
+### 5. Testing
 
-bc.. // YAML
-orderly_pay_pal_ipn:
-    # Constants for the live environment
-    email:   sales@CHANGEME.com
-    url:     https://www.paypal.com/cgi-bin/webscr
-    debug:   %kernel.debug%
-    # Debugging simply caches the latest PayPal IPN post data into the database, and retrieves it if
-    # validateIPN is called without post data. This is useful for directly trying a validateIPN call from
-    # the controller.
-
-    # Constants for the sandbox environment ; Default settings configured in Configuration.php
-    sandbox_email:   seller@paypalsandbox.com
-    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_debug:   true
-
-    # islive: if set to false then service loads settings with "sandbox_" prefix
-    islive:          false 
+This section to come.
 
 ## Support
 
