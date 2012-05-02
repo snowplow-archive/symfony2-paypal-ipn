@@ -68,14 +68,13 @@ Now we need to configure the bundle. Add the below into your Symfony2 YAML confi
     // YAML
     orderly_paypal_ipn:
 
-        # islive: if set to false then service loads settings with "sandbox_" prefix
+        # If set to false then service loads settings with "sandbox_" prefix
         islive:          false 
 
         # Constants for the live environment (default settings in Configuration.php)
         email:   sales@CHANGEME.com
         url:     https://www.paypal.com/cgi-bin/webscr
         debug:   %kernel.debug%
-
 
         # Constants for the sandbox environment (default settings in Configuration.php)
         sandbox_email:   system_CHANGEME_biz@CHANGEME.com
