@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
             $treeBuilder->root('orderly_paypal_ipn', 'array')
                 ->children()
                     ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('url')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('url')->defaultValue('https://www.paypal.com/cgi-bin/webscr')->end()
                     ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                     ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()

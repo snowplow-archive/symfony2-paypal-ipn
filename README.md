@@ -52,7 +52,7 @@ and add the following line to the end of the `$bundles` array in the `registerBu
 To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the
 `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
 
-    `Orderly/PayPalIpnBundle/Resources/config`
+    Orderly/PayPalIpnBundle/Resources/config
 
 The alternative approach is to install the tables with the following command in your project console:
 
@@ -70,13 +70,13 @@ Now we need to configure the bundle. Add the below into your Symfony2 YAML confi
         # islive: if set to false then service loads settings with "sandbox_" prefix
         islive:          false 
 
-        # Constants for the live environment
+        # Constants for the live environment (default settings in Configuration.php)
         email:   sales@CHANGEME.com
         url:     https://www.paypal.com/cgi-bin/webscr
         debug:   %kernel.debug%
 
 
-        # Constants for the sandbox environment ; Default settings configured in Configuration.php
+        # Constants for the sandbox environment (default settings in Configuration.php)
         sandbox_email:   system_CHANGEME_biz@CHANGEME.com
         sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
         sandbox_debug:   true
@@ -97,7 +97,7 @@ following file:
 
 #### To send order confirmations with Twig
 
-Then, assuming you want to send order confirmation emails using [Twig] [twig], add in this controller:
+Assuming you want to send order confirmation emails using [Twig] [twig], add in this controller:
 
     OrderlyPayPalIpnBundleEmail:
         resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
@@ -139,10 +139,10 @@ Once debugging is switched on, this is how you test:
 * PayPal will send the IPN POST data to your new PayPal IPN URL
 * Check the PayPal IPN history for success or failure (e.g. HTTP status code 500)
 * Check you received the order confirmation email (if you're sending one)
-* Check that the order and line items are stored in your database
+* Check the order and line items are stored in your database
 
 If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser
-and see what happens (for example a PHP/Symfony error, or perhaps a database or Twig not found error). This works
+and see what happens (for example a PHP or Symfony error, or perhaps a database or Twig not found error). This works
 because of the debug "replay" functionality explained in step 3 above.
 
 * Fix the bug
@@ -156,7 +156,7 @@ For support requests, please email [Orderly Ltd] [orderlyemail] or better still 
 
 This library is a port of the [Codeigniter PayPal IPN library] [codeigniterpaypalipn] written by [Alex Dean] [alexdean].
 
-The credits for symfony2-paypal-ipn are as follows:
+Many thanks to all the contributors to symfony2-paypal-ipn:
 
 * Author: [Kemor] [kemor]
 * Contributor: [Strife] [strife]
