@@ -58,7 +58,8 @@ use Orderly\PayPalIpnBundle\Entity\IpnOrderItems;
  *  - Ran Aroussi's PayPal_Lib for CodeIgniter, http://aroussi.com/ci/
  *  - Micah Carrick's Paypal PHP class, http://www.micahcarrick.com
  * 
- * This library is ported from existing Codeigniter PayPal IPN library available at https://github.com/orderly/codeigniter-paypal-ipn
+ * This library is ported from existing Codeigniter PayPal IPN library available at:
+ * https://github.com/orderly/codeigniter-paypal-ipn
  *
  */
 
