@@ -2,7 +2,7 @@
 
 ## Overview
 
-symfony2-paypal-ipn is a Symfony2 bundle for working with the PayPal IPN (Instant Payment Notification) service. The bundle acts as a listener for the PayPal IPN service and logs the incoming orders to your database using Doctrine. symfony2-paypal-ipn will be available on Packagist soon.
+[symfony2-paypal-ipn](https://github.com/orderly/symfony2-paypal-ipn) is a Symfony2 bundle for working with the PayPal IPN (Instant Payment Notification) service. The bundle acts as a listener for the PayPal IPN service and logs the incoming orders to your database using Doctrine. symfony2-paypal-ipn will be available on Packagist soon.
 
 ## Description
 
