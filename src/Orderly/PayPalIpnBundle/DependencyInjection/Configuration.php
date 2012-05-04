@@ -29,15 +29,15 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-            $treeBuilder->root('orderly_paypal_ipn', 'array')
+            $treeBuilder->root('orderly_pay_pal_ipn', 'array')
                 ->children()
+                    ->booleanNode('islive')->defaultValue(true)->end()
                     ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('url')->defaultValue('https://www.paypal.com/cgi-bin/webscr')->end()
                     ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                     ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
                     ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()
                     ->booleanNode('sandbox_debug')->defaultValue(true)->end()
-                    ->booleanNode('islive')->isRequired()->cannotBeEmpty()->end()
                 ->end()
             ->end()
             ->buildTree();

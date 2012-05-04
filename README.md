@@ -10,8 +10,7 @@ symfony2-paypal-ipn will be available on Packagist soon.
 
 symfony2-paypal-ipn is a near-direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users.
 
-This library ("bundle" in Symfony language) focuses on the "post-payment" workflow, i.e. the processing required once the
-payment has been made and PayPal has posted an Instant Payment Notification call to the IPN controller.
+This library ("bundle" in Symfony language) focuses on the "post-payment" workflow, i.e. the processing required once the payment has been made and PayPal has posted an Instant Payment Notification call to the IPN controller.
 
 This library handles:
 
@@ -21,13 +20,11 @@ This library handles:
 * Interpreting PayPal's payment status
 * Storing the order and line items in the database
 
-All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g.
-sending emails) is left as an exercise for the reader. If you prefer a more general-purpose PayPal toolkit for Symfony2,
-please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
+All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g. sending emails) is left as an exercise for the reader. If you prefer a more general-purpose PayPal toolkit for Symfony2, please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2.0] [doctrine2.0].
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2. ] [doctrine2.0].
 
 An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
 
@@ -54,12 +51,19 @@ We now need to register the new bundle. Edit your `AppKernel.php` file:
 
 and add the following line to the end of the `$bundles` array in the `registerBundles()` method:
 
-    new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()
+    new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle(),
+
+Now edit your `autoload.php` file:
+
+    {{YOUR SYMFONY APP}}/app/autoload.php 
+
+and add the following line to the end of your `registerNamespaces(array(` invocation:
+
+    'Orderly'          => __DIR__.'/../vendor/orderly/src',
 
 ### 3. Deploy the database tables
 
-To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the
-`create_mysql_tables.sql` MySQL file against your database. You can find the file here:
+To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
 
     Orderly/PayPalIpnBundle/Resources/config
 
@@ -74,7 +78,7 @@ Note that this second method does **not** copy across the table field comments f
 Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file `app/config/config.yml`:
 
     # PaypalIpnBundle Configuration
-    orderly_paypal_ipn:
+    orderly_pay_pal_ipn:
 
         # If set to false then service loads settings with "sandbox_" prefix
         islive:  false 
@@ -91,15 +95,11 @@ Now we need to configure the bundle. Add the below into your Symfony2 YAML confi
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
 
-A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had
-IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it
-reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the
-`validateIPN()` IPN handler is doing.
+A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the `validateIPN()` IPN handler is doing.
 
 ### 5. Setup routing (optional but recommended)
 
-To tell Symfony's routing system where to find one of our sample controllers, first open up the
-following file:
+To tell Symfony's routing system where to find one of our sample controllers, first open up the following file:
 
     {{YOUR SYMFONY APP}}/app/config/routing.yml
 
@@ -120,8 +120,7 @@ Don't forget to tell PayPal about your new PayPal IPN URL.
 
 #### To log orders but not send notifications
 
-Alternatively if you just want to log orders in the database (and not send out any notifications), then add
-in this controller:
+Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
 
     OrderlyPayPalIpnBundleNoEmail:
         resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
@@ -134,8 +133,7 @@ Your site will now be listening for incoming IPNs on:
 
 Don't forget to tell PayPal about your new PayPal IPN URL.
 
-**Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
-sample files with your own business logic before putting this bundle into production.**
+**Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
 
 ### 6. Test and troubleshoot
 
@@ -149,9 +147,7 @@ Once debugging is switched on, this is how you test:
 * Check you received the order confirmation email (if you're sending one)
 * Check the order and line items are stored in your database
 
-If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser
-and see what happens (for example a PHP or Symfony error, or perhaps a database or Twig not found error). This works
-because of the debug "replay" functionality explained in step 3 above.
+If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser and see what happens (for example a PHP or Symfony error, or perhaps a database or Twig not found error). This works because of the debug "replay" functionality explained in step 3 above.
 
 * Fix the bug
 * Repeat
