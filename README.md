@@ -63,15 +63,23 @@ and add the following line to the end of your `registerNamespaces(array(` invoca
 
 ### 3. Deploy the database tables
 
-To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
+There are two different ways of deploying the three database tables required by PayPalIpnBundle:
 
-    Orderly/PayPalIpnBundle/Resources/config
+#### Using the Symfony console
 
-The alternative approach is to install the tables with the following command in your project console:
+You can install the tables with the following command in your project console:
 
     $ php app/console doctrine:schema:update --force
 
-Note that this second method does **not** copy across the table field comments found in the SQL file. 
+Note that this method does **not** copy across the table field comments found in the SQL file. 
+
+#### Manually running the MySQL script
+
+Alternatively, you can run the `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
+
+    Orderly/PayPalIpnBundle/Resources/config
+
+If you choose this option, you may want to modify the `DEFAULT CHARSET` for each table (currently set to "utf8") before running. 
 
 ### 4. Configure
 

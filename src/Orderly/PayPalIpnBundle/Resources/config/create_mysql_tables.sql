@@ -23,7 +23,7 @@ CREATE TABLE `ipn_log` (
   created_at DATETIME NOT NULL,
   updated_at DATETIME NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ipn_orders`;
 
@@ -119,7 +119,7 @@ CREATE TABLE `ipn_orders` (
   updated_at DATETIME NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT UniqueTransactionID UNIQUE (`txn_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `ipn_order_items`;
 
@@ -152,4 +152,4 @@ CREATE TABLE `ipn_order_items` (
   updated_at DATETIME NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (`order_id`) REFERENCES ipn_orders(`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
