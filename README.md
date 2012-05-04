@@ -33,14 +33,21 @@ An example order confirmation email built using the [Twig] [twig] templating lan
 
 ## Installation
 
-### 1. Install and register the bundle
+### 1. Install from GitHub
 
-First copy the `Orderly` folder from this repository to within your project's own `src` folder. The
-`OrderlyPayPalIpnBundle.php` file should now be available here: 
+We're going to install the PayPalIPNBundle straight into your Symfony `vendor` directory:
 
-    {{YOUR SYMFONY APP}}/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
+    $ cd {{YOUR SYMFONY APP}}/vendor
+    $ git clone [[add link]]
+    $ mv symfony2-paypal-ipn orderly
 
-Next, we need to register the new bundle. So, edit your `AppKernel.php` file:
+Now the all-important `OrderlyPayPalIpnBundle.php` file should now be available here: 
+
+    {{YOUR SYMFONY APP}}/vendor/orderly/src/Orderly/PaypalIpnBundle/OrderlyPayPalIpnBundle.php
+
+### 2. Register the bundle
+
+We now need to register the new bundle. Edit your `AppKernel.php` file:
 
     {{YOUR SYMFONY APP}}/app/AppKernel.php 
 
@@ -48,7 +55,7 @@ and add the following line to the end of the `$bundles` array in the `registerBu
 
     new Orderly\PayPalIpnBundle\OrderlyPayPalIpnBundle()
 
-### 2. Deploy the database tables
+### 3. Deploy the database tables
 
 To create the MySQL tables required by PayPalIpnBundle, the **recommended approach** is to run the
 `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
@@ -61,11 +68,11 @@ The alternative approach is to install the tables with the following command in 
 
 Note that this second method does **not** copy across the table field comments found in the SQL file. 
 
-### 3. Configure
+### 4. Configure
 
-Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file:
+Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file `app/config/config.yml`:
 
-    // YAML
+    # PaypalIpnBundle Configuration
     orderly_paypal_ipn:
 
         # If set to false then service loads settings with "sandbox_" prefix
@@ -88,7 +95,7 @@ IPN data (i.e. POST variables) into the database. Then when you access the IPN U
 reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the
 `validateIPN()` IPN handler is doing.
 
-### 4. Setup routing (optional but recommended)
+### 5. Setup routing (optional but recommended)
 
 To tell Symfony's routing system where to find one of our sample controllers, first open up the
 following file:
@@ -129,7 +136,7 @@ Don't forget to tell PayPal about your new PayPal IPN URL.
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these
 sample files with your own business logic before putting this bundle into production.**
 
-### 5. Test and troubleshoot
+### 6. Test and troubleshoot
 
 Now it's time to test. First, make sure that `islive` is set to false, and `sandbox_debug` is set to true.
 
