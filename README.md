@@ -6,31 +6,31 @@ symfony2-paypal-ipn is a Symfony2 bundle for working with the PayPal IPN (Instan
 
 ## Description
 
-symfony2-paypal-ipn is a near-direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users.
+symfony2-paypal-ipn is a direct port of [codeigniter-paypal-ipn] [codeigniterpaypalipn], an equivalent library for CodeIgniter users, also by Orderly Ltd.
 
 This library ("bundle" in Symfony language) focuses on the "post-payment" workflow, i.e. the processing required once the payment has been made and PayPal has posted an Instant Payment Notification call to the IPN controller.
 
 This library handles:
 
-* Validating the IPN call
-* Logging the IPN call
-* Extracting the order and line item information from the IPN call
-* Interpreting PayPal's payment status
-* Storing the order and line items in the database
+1. Validating the IPN call
+2. Logging the IPN call
+3. Extracting the order and line item information from the IPN call
+4. Interpreting PayPal's payment status
+5. Storing the order and line items in the database
 
-All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g. sending emails) is left as an exercise for the reader. If you prefer a more general-purpose PayPal toolkit for Symfony2, please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
+All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g. sending emails) is left as an exercise for the reader. If you require a more general-purpose Symfony2 toolkit for working with PayPal, please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2. ] [doctrine2.0].
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2.0] [doctrine2.0].
 
-An example order confirmation email built using the [Twig] [twig] templating language is also provided. 
+An example order confirmation email which uses the [Twig] [twig] templating language is also provided. 
 
 ## Installation
 
 ### 1. Install from GitHub
 
-We're going to install the PayPalIPNBundle straight into your Symfony `vendor` directory:
+We're going to install the PayPalIPNBundle directly into your Symfony `vendor` directory:
 
     $ cd {{YOUR SYMFONY APP}}/vendor
     $ git clone [[add link]]
@@ -55,7 +55,7 @@ Now edit your `autoload.php` file:
 
     {{YOUR SYMFONY APP}}/app/autoload.php 
 
-and add the following line to the end of your `registerNamespaces(array(` invocation:
+and add the following line to the end of your `registerNamespaces()` invocation:
 
     'Orderly'          => __DIR__.'/../vendor/orderly/src',
 
@@ -153,18 +153,18 @@ Once debugging is switched on, this is how you test:
 * Check you received the order confirmation email (if you're sending one)
 * Check the order and line items are stored in your database
 
-If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser and see what happens (for example a PHP or Symfony error, or perhaps a database or Twig not found error). This works because of the debug "replay" functionality explained in step 3 above.
+If you have problems with any of your checks, then the next step is to manually invoke your IPN URL in a browser and see what happens (for example a PHP or Symfony error, or perhaps a database or Twig not found error). This works because of the debug "replay" functionality explained in step 3 above. Next:
 
 * Fix the bug
 * Repeat
 
-## Support
+## Support and bugs
 
-For support requests, please email [Orderly Ltd] [orderlyemail] or better still raise a [GitHub issue] [newissue].
+For support requests, please email [Orderly Ltd] [orderlyemail]. If you think there is a bug in the library, or a missing feature you would like to see added, please raise a [new GitHub issue] [newissue].
 
 ## Credits
 
-This library is a port of the [Codeigniter PayPal IPN library] [codeigniterpaypalipn] written by [Alex Dean] [alexdean].
+This library is a port of the [Codeigniter PayPal IPN library] [codeigniterpaypalipn], also released by Orderly Ltd.
 
 Many thanks to all the contributors to symfony2-paypal-ipn:
 
