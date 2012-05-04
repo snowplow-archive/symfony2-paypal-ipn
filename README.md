@@ -39,6 +39,7 @@ We're going to install the PayPalIPNBundle straight into your Symfony `vendor` d
 
     $ cd {{YOUR SYMFONY APP}}/vendor
     $ git clone [[add link]]
+    ...
     $ mv symfony2-paypal-ipn orderly
 
 Now the all-important `OrderlyPayPalIpnBundle.php` file should now be available here: 
@@ -90,7 +91,7 @@ Now we need to configure the bundle. Add the below into your Symfony2 YAML confi
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
 
-A note on the **`debug`** setting: if set to true, then PayPalIpnBundle will store the last IPN access which had
+A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had
 IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it
 reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the
 `validateIPN()` IPN handler is doing.
