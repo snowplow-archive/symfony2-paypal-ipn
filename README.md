@@ -122,7 +122,7 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 
     http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
 
-Don't forget to tell PayPal about your new PayPal IPN URL.
+Note that this email template depends on Twig's [`number_format`] [numberformat] filter, which was added in December 2012 (you may need to update your Twig version to use this). Don't forget to tell PayPal about your new PayPal IPN URL.
 
 #### To log orders but not send notifications
 
@@ -213,6 +213,7 @@ limitations under the License.
 [symfony2]: http://symfony.com/
 [doctrine2.0]: http://www.doctrine-project.org/
 [twig]: http://twig.sensiolabs.org/
+[numberformat]: https://github.com/fabpot/Twig/commit/0edcfdd
 [orderlyemail]: orderly-support@keplarllp.com
 [newissue]: https://github.com/orderly/symfony2-paypal-ipn/issues/new
 [kemor]: https://github.com/kemor
