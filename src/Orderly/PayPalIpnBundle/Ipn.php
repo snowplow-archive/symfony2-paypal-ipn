@@ -288,7 +288,7 @@ class Ipn
         $numItems = $hasCart ? (int)$this->order->getNumCartItems() : 1;
 
         $totalBeforeDiscount = 0;
-        for ($i = 1; $i <= $numItems; $i++) {
+        for ($i = 0; $i < $numItems; $i++) {
             
             // Suffixes are different depending on whether there are multiple items (a cart) or not
             $suffix = $hasCart ? ($i + 1) : '';
