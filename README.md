@@ -33,7 +33,7 @@ An example order confirmation email which uses the [Twig] [twig] templating lang
 We're going to install the PayPalIPNBundle directly into your Symfony `vendor` directory:
 
     $ cd {{YOUR SYMFONY APP}}/vendor
-    $ git clone [[add link]]
+    $ git clone git://github.com/orderly/symfony2-paypal-ipn.git
     ...
     $ mv symfony2-paypal-ipn orderly
 
@@ -122,7 +122,7 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 
     http://{{YOUR DOMAIN}}/ipn/ipn-twig-email-notification
 
-Note that this email template depends on Twig's [`number_format`] [numberformat] filter, which was added in December 2012 (you may need to update your Twig version to use this). Don't forget to tell PayPal about your new PayPal IPN URL.
+Note that the sample email template provided depends on Twig's [`number_format`] [numberformat] filter, which was added in December 2012 (you may need to update your Twig version to use this). Don't forget to tell PayPal about your new PayPal IPN URL.
 
 #### To log orders but not send notifications
 
