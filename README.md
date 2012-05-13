@@ -2,7 +2,7 @@
 
 ## Overview
 
-[symfony2-paypal-ipn](https://github.com/orderly/symfony2-paypal-ipn) is a Symfony2 bundle for working with the PayPal IPN (Instant Payment Notification) service. The bundle acts as a listener for the PayPal IPN service and logs the incoming orders to your database using Doctrine. Optionally it can also send order confirmation emails too (see the [sample Symfony controller] [twigcontroller] for details).
+[symfony2-paypal-ipn](https://github.com/orderly/symfony2-paypal-ipn) is a Symfony2 bundle for working with the PayPal IPN (Instant Payment Notification) service. The bundle acts as a listener for the PayPal IPN service and logs the incoming orders to your database using Doctrine. Sending order confirmation emails is easy too (see the [sample Symfony controller] [twigcontroller] for details).
 
 symfony2-paypal-ipn is available on [Packagist] [packagist] and [KnpBundles] [knpbundles] as well as on GitHub.
 
