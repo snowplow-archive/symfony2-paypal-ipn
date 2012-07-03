@@ -323,9 +323,10 @@ class Ipn
             for ($ii = 1, $count = 7; $ii < $count; $ii++)
             {
                 if(isset($this->ipnData['option_name'.$ii.'_'.$suffix]))
-                    $this->orderItems[$i]->setOptionName.$ii($this->ipnData['option_name'.$ii.'_'.$suffix]);
+                    $method = 'setOptionName' . $ii;
+                    $this->orderItems[$i]->$method($this->ipnData['option_name'.$ii.'_'.$suffix]);
                 if(isset($this->ipnData['option_selection'.$ii.'_'.$suffix]))
-                    $this->orderItems[$i]->setOptionSelection.$ii($this->ipnData['option_selection'.$ii.'_'.$suffix]);
+                    $this->orderItems[$i]->$method($this->ipnData['option_selection'.$ii.'_'.$suffix]);
             }
             
             //Updating dates
