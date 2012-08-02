@@ -68,35 +68,35 @@ class IpnOrderItems
     /**
      * @var decimal $mcGross
      *
-     * @ORM\Column(name="mc_gross", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_gross", type="decimal", scale=2, nullable=true)
      */
     private $mcGross;
 
     /**
      * @var decimal $mcHandling
      *
-     * @ORM\Column(name="mc_handling", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_handling", type="decimal", scale=2, nullable=true)
      */
     private $mcHandling;
 
     /**
      * @var decimal $mcShipping
      *
-     * @ORM\Column(name="mc_shipping", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_shipping", type="decimal", scale=2, nullable=true)
      */
     private $mcShipping;
 
     /**
      * @var decimal $tax
      *
-     * @ORM\Column(name="tax", type="decimal", nullable=true)
+     * @ORM\Column(name="tax", type="decimal", scale=2, nullable=true)
      */
     private $tax;
 
     /**
      * @var decimal $costPerItem
      *
-     * @ORM\Column(name="cost_per_item", type="decimal", nullable=true)
+     * @ORM\Column(name="cost_per_item", type="decimal", scale=2, nullable=true)
      */
     private $costPerItem;
 

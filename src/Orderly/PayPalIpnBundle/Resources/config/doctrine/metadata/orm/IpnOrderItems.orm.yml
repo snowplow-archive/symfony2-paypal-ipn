@@ -33,21 +33,26 @@ IpnOrderItems:
       nullable: true
     mcGross:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_gross
     mcHandling:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_handling
     mcShipping:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_shipping
     tax:
       type: decimal
+      scale: 2
       nullable: true
     costPerItem:
       type: decimal
+      scale: 2
       nullable: true
       column: cost_per_item
     optionName1:
