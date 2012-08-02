@@ -173,6 +173,7 @@ Many thanks to all the contributors to symfony2-paypal-ipn:
 * Author: [Kemor] [kemor]
 * Contributor: [Strife] [strife]
 * Contributor: [Alex Dean] [alexdean]
+* Contributor: [Ivo Azirjans] [ivoaz]
 
 ## Disclaimer and warning
 
