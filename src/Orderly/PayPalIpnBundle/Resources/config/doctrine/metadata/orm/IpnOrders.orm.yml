@@ -173,6 +173,7 @@ IpnOrders:
       nullable: true
     tax:
       type: decimal
+      scale: 2
       nullable: true
     authId:
       type: string
@@ -251,6 +252,7 @@ IpnOrders:
       column: shipping_method
     shipping:
       type: decimal
+      scale: 2
       nullable: true
     transactionEntity:
       type: string
@@ -272,6 +274,7 @@ IpnOrders:
       column: txn_type
     exchangeRate:
       type: decimal
+      scale: 2
       nullable: true
       column: exchange_rate
     mcCurrency:
@@ -282,30 +285,37 @@ IpnOrders:
       column: mc_currency
     mcFee:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_fee
     mcGross:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_gross
     mcHandling:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_handling
     mcShipping:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_shipping
     paymentFee:
       type: decimal
+      scale: 2
       nullable: true
       column: payment_fee
     paymentGross:
       type: decimal
+      scale: 2
       nullable: true
       column: payment_gross
     settleAmount:
       type: decimal
+      scale: 2
       nullable: true
       column: settle_amount
     settleCurrency:
@@ -366,23 +376,29 @@ IpnOrders:
       nullable: true
     amount1:
       type: decimal
+      scale: 2
       nullable: true
     amount2:
       type: decimal
+      scale: 2
       nullable: true
     amount3:
       type: decimal
+      scale: 2
       nullable: true
     mcAmount1:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_amount1
     mcAmount2:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_amount2
     mcAmount3:
       type: decimal
+      scale: 2
       nullable: true
       column: mc_amount3
     recurring:
@@ -446,9 +462,11 @@ IpnOrders:
       column: order_status
     discount:
       type: decimal
+      scale: 2
       nullable: true
     shippingDiscount:
       type: decimal
+      scale: 2
       nullable: true
       column: shipping_discount
     ipnTrackId:

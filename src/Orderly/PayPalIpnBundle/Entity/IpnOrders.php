@@ -236,7 +236,7 @@ class IpnOrders
     /**
      * @var decimal $tax
      *
-     * @ORM\Column(name="tax", type="decimal", nullable=true)
+     * @ORM\Column(name="tax", type="decimal", scale=2, nullable=true)
      */
     private $tax;
 
@@ -334,7 +334,7 @@ class IpnOrders
     /**
      * @var decimal $shipping
      *
-     * @ORM\Column(name="shipping", type="decimal", nullable=true)
+     * @ORM\Column(name="shipping", type="decimal", scale=2, nullable=true)
      */
     private $shipping;
 
@@ -362,7 +362,7 @@ class IpnOrders
     /**
      * @var decimal $exchangeRate
      *
-     * @ORM\Column(name="exchange_rate", type="decimal", nullable=true)
+     * @ORM\Column(name="exchange_rate", type="decimal", scale=2, nullable=true)
      */
     private $exchangeRate;
 
@@ -376,49 +376,49 @@ class IpnOrders
     /**
      * @var decimal $mcFee
      *
-     * @ORM\Column(name="mc_fee", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_fee", type="decimal", scale=2, nullable=true)
      */
     private $mcFee;
 
     /**
      * @var decimal $mcGross
      *
-     * @ORM\Column(name="mc_gross", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_gross", type="decimal", scale=2, nullable=true)
      */
     private $mcGross;
 
     /**
      * @var decimal $mcHandling
      *
-     * @ORM\Column(name="mc_handling", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_handling", type="decimal", scale=2, nullable=true)
      */
     private $mcHandling;
 
     /**
      * @var decimal $mcShipping
      *
-     * @ORM\Column(name="mc_shipping", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_shipping", type="decimal", scale=2, nullable=true)
      */
     private $mcShipping;
 
     /**
      * @var decimal $paymentFee
      *
-     * @ORM\Column(name="payment_fee", type="decimal", nullable=true)
+     * @ORM\Column(name="payment_fee", type="decimal", scale=2, nullable=true)
      */
     private $paymentFee;
 
     /**
      * @var decimal $paymentGross
      *
-     * @ORM\Column(name="payment_gross", type="decimal", nullable=true)
+     * @ORM\Column(name="payment_gross", type="decimal", scale=2, nullable=true)
      */
     private $paymentGross;
 
     /**
      * @var decimal $settleAmount
      *
-     * @ORM\Column(name="settle_amount", type="decimal", nullable=true)
+     * @ORM\Column(name="settle_amount", type="decimal", scale=2, nullable=true)
      */
     private $settleAmount;
 
@@ -495,42 +495,42 @@ class IpnOrders
     /**
      * @var decimal $amount1
      *
-     * @ORM\Column(name="amount1", type="decimal", nullable=true)
+     * @ORM\Column(name="amount1", type="decimal", scale=2, nullable=true)
      */
     private $amount1;
 
     /**
      * @var decimal $amount2
      *
-     * @ORM\Column(name="amount2", type="decimal", nullable=true)
+     * @ORM\Column(name="amount2", type="decimal", scale=2, nullable=true)
      */
     private $amount2;
 
     /**
      * @var decimal $amount3
      *
-     * @ORM\Column(name="amount3", type="decimal", nullable=true)
+     * @ORM\Column(name="amount3", type="decimal", scale=2, nullable=true)
      */
     private $amount3;
 
     /**
      * @var decimal $mcAmount1
      *
-     * @ORM\Column(name="mc_amount1", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_amount1", type="decimal", scale=2, nullable=true)
      */
     private $mcAmount1;
 
     /**
      * @var decimal $mcAmount2
      *
-     * @ORM\Column(name="mc_amount2", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_amount2", type="decimal", scale=2, nullable=true)
      */
     private $mcAmount2;
 
     /**
      * @var decimal $mcAmount3
      *
-     * @ORM\Column(name="mc_amount3", type="decimal", nullable=true)
+     * @ORM\Column(name="mc_amount3", type="decimal", scale=2, nullable=true)
      */
     private $mcAmount3;
 
@@ -614,14 +614,14 @@ class IpnOrders
     /**
      * @var decimal $discount
      *
-     * @ORM\Column(name="discount", type="decimal", nullable=true)
+     * @ORM\Column(name="discount", type="decimal", scale=2, nullable=true)
      */
     private $discount;
 
     /**
      * @var decimal $shippingDiscount
      *
-     * @ORM\Column(name="shipping_discount", type="decimal", nullable=true)
+     * @ORM\Column(name="shipping_discount", type="decimal", scale=2, nullable=true)
      */
     private $shippingDiscount;
 
