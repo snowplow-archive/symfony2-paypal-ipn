@@ -457,7 +457,7 @@ IpnOrders:
       nullable: true
       column: case_creation_date
     orderStatus:
-      type: enumorderstatus
+      type: string
       nullable: true
       column: order_status
     discount:
