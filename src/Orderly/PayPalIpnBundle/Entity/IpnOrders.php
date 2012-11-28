@@ -605,9 +605,9 @@ class IpnOrders
     private $caseCreationDate;
 
     /**
-     * @var enumorderstatus $orderStatus
+     * @var string $orderStatus
      *
-     * @ORM\Column(name="order_status", type="enumorderstatus", nullable=true)
+     * @ORM\Column(name="order_status", type="string", nullable=true)
      */
     private $orderStatus;
 
@@ -2298,7 +2298,7 @@ class IpnOrders
     /**
      * Set orderStatus
      * 
-     * @param enumorderstatus $orderStatus
+     * @param string $orderStatus
      */
     public function setOrderStatus($orderStatus)
     {
@@ -2308,7 +2308,7 @@ class IpnOrders
     /**
      * Get orderStatus
      *
-     * @return enumorderstatus 
+     * @return string 
      */
     public function getOrderStatus()
     {
