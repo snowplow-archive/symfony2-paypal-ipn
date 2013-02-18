@@ -2002,7 +2002,7 @@ class IpnOrders
      */
     public function setAmount2($amount2)
     {
-        $this->amount2 = $floatval(amount2);
+        $this->amount2 = floatval(amount2);
     }
 
     /**
