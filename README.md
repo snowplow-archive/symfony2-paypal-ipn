@@ -34,10 +34,12 @@ An example order confirmation email which uses the [Twig] [twig] templating lang
 
 We're going to install the PayPalIPNBundle directly into your Symfony `vendor` directory:
 
-    $ cd {{YOUR SYMFONY APP}}/vendor
-    $ git clone git://github.com/orderly/symfony2-paypal-ipn.git
-    ...
-    $ mv symfony2-paypal-ipn orderly
+```bash
+$ cd {{YOUR SYMFONY APP}}/vendor
+$ git clone git://github.com/orderly/symfony2-paypal-ipn.git
+...
+$ mv symfony2-paypal-ipn orderly
+```
 
 Now the all-important `OrderlyPayPalIpnBundle.php` file should now be available here: 
 
@@ -69,7 +71,9 @@ There are two different ways of deploying the three database tables required by 
 
 You can install the tables with the following command in your project console:
 
-    $ php app/console doctrine:schema:update --force
+```bash
+$ php app/console doctrine:schema:update --force
+```
 
 Note that this method does **not** copy across the table field comments found in the SQL file. 
 
@@ -149,10 +153,12 @@ To tell Symfony's routing system where to find one of our sample controllers, fi
 
 Assuming you want to send order confirmation emails using [Twig] [twig], add in this controller:
 
-    OrderlyPayPalIpnBundleEmail:
-        resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
-        type:     annotation
-        prefix:   /ipn/
+```yaml
+OrderlyPayPalIpnBundleEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
+    type:     annotation
+    prefix:   /ipn/
+```
 
 Your site will now be listening for incoming Instant Payment Notifications on the URL:
 
@@ -164,10 +170,12 @@ Note that the sample email template provided depends on Twig's [`number_format`]
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
 
-    OrderlyPayPalIpnBundleNoEmail:
-        resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
-        type:     annotation
-        prefix:   /ipn/
+```bash
+OrderlyPayPalIpnBundleNoEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
+    type:     annotation
+    prefix:   /ipn/
+```
 
 Your site will now be listening for incoming IPNs on:
 
