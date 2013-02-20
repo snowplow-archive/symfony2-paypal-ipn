@@ -4,8 +4,7 @@ namespace Orderly\PayPalIpnBundle\Document;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert,
     Symfony\Component\Validator\Constraints as Assert;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
-    Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /*
  * Copyright 2012 Orderly Ltd
@@ -57,7 +56,7 @@ class IpnOrders
     /**
      * @var integer $testIpn
      *
-     * @MongoDB\Field(name="test_ipn", type="integer")
+     * @MongoDB\Field(name="test_ipn", type="int")
      */
     private $testIpn;
 
@@ -161,7 +160,7 @@ class IpnOrders
      * @var string $lastName
      *
      * @MongoDB\Field(name="last_name", type="string")
-     * @Assert\MaxLength(64
+     * @Assert\MaxLength(64)
      */
     private $lastName;
 
@@ -287,7 +286,7 @@ class IpnOrders
     /**
      * @var integer $authAmount
      *
-     * @MongoDB\Field(name="auth_amount", type="integer")
+     * @MongoDB\Field(name="auth_amount", type="int")
      */
     private $authAmount;
 
@@ -302,7 +301,7 @@ class IpnOrders
     /**
      * @var integer $numCartItems
      *
-     * @MongoDB\Field(name="num_cart_items", type="integer")
+     * @MongoDB\Field(name="num_cart_items", type="int")
      */
     private $numCartItems;
 
@@ -357,7 +356,7 @@ class IpnOrders
     /**
      * @var integer $remainingSettle
      *
-     * @MongoDB\Field(name="remaining_settle", type="integer")
+     * @MongoDB\Field(name="remaining_settle", type="int")
      */
     private $remainingSettle;
 
@@ -425,7 +424,7 @@ class IpnOrders
     /**
      * @var float $mcGross
      *
-     * @MongoDB\Field(name="mc_gross", type="float)
+     * @MongoDB\Field(name="mc_gross", type="float")
      */
     private $mcGross;
 
@@ -490,8 +489,7 @@ class IpnOrders
     /**
      * @var integer $auctionMultiItem
      *
-     * @ORM\Column(name="auction_multi_item", type="integer", nullable=true)
-     * @MongoDB\Field(name="auction_multi_item", type="integer")
+     * @MongoDB\Field(name="auction_multi_item", type="int")
      */
     private $auctionMultiItem;
 
@@ -612,8 +610,7 @@ class IpnOrders
     /**
      * @var integer $recurTimes
      *
-     * @ORM\Column(name="recur_times", type="integer", nullable=true)
-     * @MongoDB\Field(name="recur_times", type="integer")
+     * @MongoDB\Field(name="recur_times", type="int")
      */
     private $recurTimes;
 
@@ -725,7 +722,7 @@ class IpnOrders
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = trim($id);
     }
 
     /**

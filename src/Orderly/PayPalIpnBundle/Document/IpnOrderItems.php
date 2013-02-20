@@ -4,8 +4,7 @@ namespace Orderly\PayPalIpnBundle\Document;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert,
     Symfony\Component\Validator\Constraints as Assert;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
-    Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /*
  * Copyright 2012 Orderly Ltd
@@ -41,7 +40,7 @@ class IpnOrderItems
     /**
      * @var integer $orderId
      *
-     * @MongoDB\Field(name="order_id", type="integer")
+     * @MongoDB\Field(name="order_id", type="int")
      */
     private $orderId;
 
@@ -148,7 +147,7 @@ class IpnOrderItems
      * @var string $optionSelection3
      *
      * @MongoDB\Field(name="option_selection_3", type="string")
-     * @Assert\Length(200)
+     * @Assert\MaxLength(200)
      */
     private $optionSelection3;
 
@@ -171,7 +170,8 @@ class IpnOrderItems
     /**
      * @var string $optionName5
      *
-     * @ORM\Column(name="option_name_5", type="string", length=64, nullable=true)
+     * @MongoDB\Field(name="option_name_5", type="string")
+     * @Assert\MaxLength(64)
      */
     private $optionName5;
 
@@ -186,7 +186,8 @@ class IpnOrderItems
     /**
      * @var string $optionName6
      *
-     * @ORM\Column(name="option_name_6", type="string", length=64, nullable=true)
+     * @MongoDB\Field(name="option_name_6", type="string")
+     * @Assert\MaxLength(64)
      */
     private $optionName6;
 
@@ -238,7 +239,7 @@ class IpnOrderItems
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = trim($id);
     }
 
     /**

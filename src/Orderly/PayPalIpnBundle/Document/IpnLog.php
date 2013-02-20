@@ -4,8 +4,7 @@ namespace Orderly\PayPalIpnBundle\Document;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert,
     Symfony\Component\Validator\Constraints as Assert;
 
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
-    Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /*
  * Copyright 2012 Orderly Ltd
@@ -96,7 +95,7 @@ class IpnLog
     /**
      * @var datetime $createdAt
      *
-     * @MongoDB\Field(name="created_at", type="datetime")
+     * @MongoDB\Field(name="created_at", type="date")
      * @Assert\NotBlank()
      */
     private $createdAt;
@@ -118,7 +117,7 @@ class IpnLog
      */
     public function setId($id)
     {
-        $this->id = intval($id);
+        $this->id = trim($id);
     }
 
     /**
