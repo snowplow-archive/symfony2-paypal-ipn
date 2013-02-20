@@ -98,14 +98,17 @@ class OrderlyPayPalIpnExtension extends Extension
         $classes = isset($config['classes']) ? $config['classes'] : array();
 
         $params = array(
-          "ipn_log","ipn_order_items","ipn_orders"
+            "ipn_log","ipn_order_items","ipn_orders"
         );
 
         $container->setAlias('paypal_ipn.driver.object_manager', $config['object_manager']);
 
         foreach($params as $param)
         {
-            $container->setParameter(sprintf('paypal_ipn.class.%s', $param), $classes[$param]);
+            if (isset($classes[$param]))
+            {
+                $container->setParameter(sprintf('paypal_ipn.class.%s', $param), $classes[$param]);
+            }
         }
     }
 }
