@@ -21,7 +21,7 @@
     "repositories": [
 	{
 	    "type" : "vcs",
-	    "url"  : "https://github.com/orderly/symfony2-paypal-ipn.git"
+	    "url"  : "https://github.com/carlescliment/symfony2-paypal-ipn.git"
 	}
     ]
 }
