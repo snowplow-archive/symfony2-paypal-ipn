@@ -85,25 +85,59 @@ If you choose this option, you may want to modify the `DEFAULT CHARSET` for each
 
 Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file `app/config/config.yml`:
 
-    # PaypalIpnBundle Configuration
-    orderly_pay_pal_ipn:
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
 
-        # If set to false then service loads settings with "sandbox_" prefix
-        islive:  false 
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
 
-        # Constants for the live environment (default settings in Configuration.php)
-        email:   sales@CHANGEME.com
-        url:     https://www.paypal.com/cgi-bin/webscr
-        debug:   %kernel.debug%
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
 
-        # Constants for the sandbox environment (default settings in Configuration.php)
-        sandbox_email:   system_CHANGEME_biz@CHANGEME.com
-        sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-        sandbox_debug:   true
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers:
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes: ~
+```
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
 
 A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the `validateIPN()` IPN handler is doing.
+
+#### 4.1 Use MongoDB backend
+
+To use the IPN listener with a MongoDB backend change the drivers section to **odm** and provide the name of your MongoDB object manager. Enclosed is a basic example configuration.
+
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
+
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
+
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers:
+        odm:
+            object_manager: doctrine.odm.mongodb.document_manager
+            classes: ~
+```
 
 ### 5. Setup routing (optional but recommended)
 
