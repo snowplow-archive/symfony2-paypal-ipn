@@ -202,6 +202,42 @@ If you have problems with any of your checks, then the next step is to manually 
 * Fix the bug
 * Repeat
 
+### 7. Full configuration
+
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
+
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
+
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers: # Define one driver only.
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes:
+                ipn_log: Orderly\PayPalIpnBundle\Entity\IpnLog
+                ipn_order_items: Orderly\PayPalIpnBundle\Entity\IpnOrderItems
+                ipn_orders: Orderly\PayPalIpnBundle\Entity\IpnOrders
+        # OR
+        odm:
+            object_manager: doctrine.odm.mongodb.document_manager
+            classes:
+                ipn_log: Orderly\PayPalIpnBundle\Document\IpnLog
+                ipn_order_items: Orderly\PayPalIpnBundle\Document\IpnOrderItems
+                ipn_orders: Orderly\PayPalIpnBundle\Document\IpnOrders
+
+```
+
 ## Support and bugs
 
 For support requests, please email [Orderly Ltd] [orderlyemail]. If you think there is a bug in the library, or a missing feature you would like to see added, please raise a [new GitHub issue] [newissue].
