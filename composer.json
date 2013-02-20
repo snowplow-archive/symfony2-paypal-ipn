@@ -1,5 +1,5 @@
 {
-    "name": "carlescliment/paypal-ipn-bundle",
+    "name": "orderly/paypal-ipn-bundle",
     "type": "symfony-bundle",
     "description": "A Symfony2 bundle for retrieving and logging PayPal Instant Payment Notifications (PayPal IPNs)",
     "keywords": ["payment", "paypal", "ipn"],
@@ -18,4 +18,8 @@
     "autoload": {
         "psr-0": { "Orderly\\PayPalIpnBundle": "src" }
     }
+    "repositories": [
+	"type" : "vcs",
+	"url"  : "https://github.com/orderly/symfony2-paypal-ipn.git"
+    ]
 }
