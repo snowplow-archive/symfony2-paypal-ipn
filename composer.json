@@ -19,7 +19,9 @@
         "psr-0": { "Orderly\\PayPalIpnBundle": "src" }
     },
     "repositories": [
-	"type" : "vcs",
-	"url"  : "https://github.com/orderly/symfony2-paypal-ipn.git"
+	{
+	    "type" : "vcs",
+	    "url"  : "https://github.com/orderly/symfony2-paypal-ipn.git"
+	}
     ]
 }
