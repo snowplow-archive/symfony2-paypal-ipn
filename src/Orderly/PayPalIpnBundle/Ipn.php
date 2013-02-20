@@ -86,6 +86,7 @@ class Ipn
     const PAID = 'PAID';
     const WAITING = 'WAITING';
     const REJECTED = 'REJECTED';
+    const REFUNDED = 'REFUNDED';
 
     /** The constructor. Loads the helpers and configuration files, sets the configuration constants
      *
@@ -239,6 +240,9 @@ class Ipn
             case "Expired": // Credit card company didn't recognise card
             case "Reversed": // Credit card holder has got the credit card co to reverse the charge
                 $this->orderStatus = self::REJECTED;
+                break;
+            case "Refunded":
+                $this->orderStatus = self::REFUNDED;
                 break;
             default:
                 $this->_logTransaction('IPN', 'ERROR', 'Payment status of ' . $this->ipnData['payment_status'] . ' is not recognised', $ipnResponse);
