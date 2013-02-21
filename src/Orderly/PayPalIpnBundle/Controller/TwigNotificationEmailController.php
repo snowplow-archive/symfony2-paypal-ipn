@@ -83,6 +83,6 @@ class TwigNotificationEmailController extends Controller
 
     private function triggerEvent($event_name) {
         $dispatcher = $this->container->get('event_dispatcher');
-        $dispatcher->dispatch($event_name, new Events\PayPalEvent($this->paypal_ipn);
+        $dispatcher->dispatch($event_name, new Events\PayPalEvent($this->paypal_ipn));
     }
 }
