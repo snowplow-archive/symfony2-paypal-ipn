@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Orderly\PayPalIpnBundle\Ipn;
+use Orderly\PayPalIpnBundle\Event as Events;
 
 /*
  * Copyright 2012 Orderly Ltd 
@@ -60,6 +61,7 @@ class NoNotificationController extends Controller
                  * If you want to send email notifications on successful receipt of an order, please see the alternative, Twig template-
                  * based example controller: TwigEmailNotification.php
                  */
+    
             }
             
         }
@@ -67,10 +69,16 @@ class NoNotificationController extends Controller
         {
             return $this->redirect('/');
         }
-
+        $this->triggerEvent(Events\PayPalEvents::RECEIVED);
         $response = new Response();
         $response->setStatusCode(200);
         
         return $response;
+    }
+
+
+    private function triggerEvent($event_name) {
+        $dispatcher = $this->container->get('event_dispatcher');
+        $dispatcher->dispatch($event_name, new Events\PayPalEvent($this->paypal_ipn);
     }
 }

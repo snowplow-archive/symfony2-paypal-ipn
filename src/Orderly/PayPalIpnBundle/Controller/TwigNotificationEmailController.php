@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Orderly\PayPalIpnBundle\Ipn;
+use Orderly\PayPalIpnBundle\Event as Events;
+
 
 /*
  * Copyright 2012 Orderly Ltd 
@@ -71,10 +73,16 @@ class TwigNotificationEmailController extends Controller
         {
             return $this->redirect('/');
         }
+        $this->triggerEvent(Events\PayPalEvents::RECEIVED);
 
         $response = new Response();
         $response->setStatusCode(200);
         
         return $response;
+    }
+
+    private function triggerEvent($event_name) {
+        $dispatcher = $this->container->get('event_dispatcher');
+        $dispatcher->dispatch($event_name, new Events\PayPalEvent($this->paypal_ipn);
     }
 }
