@@ -431,7 +431,7 @@ class IpnOrders
     /**
      * @var float $mcHandling
      *
-     * @MongoDB\Field(name="mc_handling", type="decimal")
+     * @MongoDB\Field(name="mc_handling", type="float")
      */
     private $mcHandling;
 
@@ -565,7 +565,7 @@ class IpnOrders
     /**
      * @var float $mcAmount1
      *
-     * @MongoDB\Field(name="mc_amount1", type="decimal")
+     * @MongoDB\Field(name="mc_amount1", type="float")
      */
     private $mcAmount1;
 
