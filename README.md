@@ -19,6 +19,7 @@ This library handles:
 3. Extracting the order and line item information from the IPN call
 4. Interpreting PayPal's payment status
 5. Storing the order and line items in the database
+6. Dispathing an event so that other bundles can do their stuff
 
 All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g. sending emails) is left as an exercise for the reader. If you require a more general-purpose Symfony2 toolkit for working with PayPal, please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
@@ -126,6 +127,7 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 
 Note that the sample email template provided depends on Twig's [`number_format`] [numberformat] filter, which was added in December 2012 (you may need to update your Twig version to use this). Don't forget to tell PayPal about your new PayPal IPN URL.
 
+
 #### To log orders but not send notifications
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
@@ -143,7 +145,43 @@ Don't forget to tell PayPal about your new PayPal IPN URL.
 
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
 
-### 6. Test and troubleshoot
+
+
+### 6. Subscribing to events (if you need custom processing)
+
+After an IPN is received and if it is a valid one, an event with the incoming IPN will be dispatched. You can then subscribe a listener and perform whatever you need to do. Change your `config.yml` with something like this:
+
+    services:
+        # ...
+
+        paypal_im_received:
+            class: Your\OwnBundle\Event\YourPayPalListener
+            arguments: ["@doctrine.orm.entity_manager"]
+            tags:
+                - { name: kernel.event_listener, event: paypal.ipn.receive, method: onIPNReceive }
+
+
+Now you just need to code your custom listener
+
+    class PayPalListener {
+
+        private $om;
+
+        public function __construct(ObjectManager $om) {
+            $this->om = $om;
+        }
+
+        public function onIPNReceive(PayPalEvent $event) {
+            $ipn = $event->getIPN();
+            // do your stuff
+        }
+    }
+
+
+
+
+
+### 7. Test and troubleshoot
 
 Now it's time to test. First, make sure that `islive` is set to false, and `sandbox_debug` is set to true.
 
