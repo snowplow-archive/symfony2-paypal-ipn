@@ -35,10 +35,12 @@ An example order confirmation email which uses the [Twig] [twig] templating lang
 
 We're going to install the PayPalIPNBundle directly into your Symfony `vendor` directory:
 
-    $ cd {{YOUR SYMFONY APP}}/vendor
-    $ git clone git://github.com/orderly/symfony2-paypal-ipn.git
-    ...
-    $ mv symfony2-paypal-ipn orderly
+```bash
+$ cd {{YOUR SYMFONY APP}}/vendor
+$ git clone git://github.com/orderly/symfony2-paypal-ipn.git
+...
+$ mv symfony2-paypal-ipn orderly
+```
 
 Now the all-important `OrderlyPayPalIpnBundle.php` file should now be available here: 
 
@@ -63,18 +65,35 @@ and add the following line to the end of your `registerNamespaces()` invocation:
     'Orderly'          => __DIR__.'/../vendor/orderly/src',
 
 ### 3. Deploy the database tables
+With the PayPalIPN Bundle you have the choice of storing your date in a  rational database like MySQL or to use MongoDB.
+The next section provides information on how to use the two different systems.
 
-There are two different ways of deploying the three database tables required by PayPalIpnBundle:
+#### 3.1  Deploy the database tables using ORM (MySQL)
+If you´e going to use a rational database system like MySQL you have to configure the driver to use a doctrine ORM.
+You can achive this by adding the following configuration to your bundles configuration:
 
-#### Using the Symfony console
+```yaml
+orderly_pay_pal_ipn:
+    # ... Rest of the configuration
+    drivers:
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes: ~
+```
+
+The next step is to update/create the necessary database tables required by PayPalIpnBundle. There are two different ways of deploying the three database tables:
+
+##### Using the Symfony console
 
 You can install the tables with the following command in your project console:
 
-    $ php app/console doctrine:schema:update --force
+```bash
+$ php app/console doctrine:schema:update --force
+```
 
 Note that this method does **not** copy across the table field comments found in the SQL file. 
 
-#### Manually running the MySQL script
+##### Manually running the MySQL script
 
 Alternatively, you can run the `create_mysql_tables.sql` MySQL file against your database. You can find the file here:
 
@@ -82,29 +101,84 @@ Alternatively, you can run the `create_mysql_tables.sql` MySQL file against your
 
 If you choose this option, you may want to modify the `DEFAULT CHARSET` for each table (currently set to "utf8") before running. 
 
+#### 3.2  Deploy the database tables using ODM (MongoDB)
+To use MongoDB for your data store, make sure to install the [DoctrineMongoDBBundle](http://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html) before activating the ODM Driver in your section.
+More information on how to configure the bundle can be found on the [Symfony2 website](http://symfony.com/doc/current/bundles/DoctrineMongoDBBundle/index.html).
+
+```yaml
+orderly_pay_pal_ipn:
+    #....
+    drivers:
+        odm:
+            object_manager: doctrine.odm.mongodb.document_manager
+            classes: ~
+```
+**Note:** A fully configured example can be found under **4.1 Use MongoDB backend**
+
+##### Create the database tables
+By running the following command your going to create/update the MonogoDB Collections:
+
+```bash
+$ php app/console doctrine:mongodb:update --force
+```
+
 ### 4. Configure
 
 Now we need to configure the bundle. Add the below into your Symfony2 YAML configuration file `app/config/config.yml`:
 
-    # PaypalIpnBundle Configuration
-    orderly_pay_pal_ipn:
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
 
-        # If set to false then service loads settings with "sandbox_" prefix
-        islive:  false 
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
 
-        # Constants for the live environment (default settings in Configuration.php)
-        email:   sales@CHANGEME.com
-        url:     https://www.paypal.com/cgi-bin/webscr
-        debug:   %kernel.debug%
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
 
-        # Constants for the sandbox environment (default settings in Configuration.php)
-        sandbox_email:   system_CHANGEME_biz@CHANGEME.com
-        sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-        sandbox_debug:   true
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers:
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes: ~
+```
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
 
 A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the `validateIPN()` IPN handler is doing.
+
+#### 4.1 Use MongoDB backend
+
+To use the IPN listener with a MongoDB backend change the drivers section to **odm** and provide the name of your MongoDB object manager. Enclosed is a basic example configuration.
+
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
+
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
+
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers:
+        odm:
+            object_manager: doctrine.odm.mongodb.document_manager
+            classes: ~
+```
 
 ### 5. Setup routing (optional but recommended)
 
@@ -116,10 +190,12 @@ To tell Symfony's routing system where to find one of our sample controllers, fi
 
 Assuming you want to send order confirmation emails using [Twig] [twig], add in this controller:
 
-    OrderlyPayPalIpnBundleEmail:
-        resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
-        type:     annotation
-        prefix:   /ipn/
+```yaml
+OrderlyPayPalIpnBundleEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/TwigNotificationEmailController.php"
+    type:     annotation
+    prefix:   /ipn/
+```
 
 Your site will now be listening for incoming Instant Payment Notifications on the URL:
 
@@ -132,10 +208,12 @@ Note that the sample email template provided depends on Twig's [`number_format`]
 
 Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
 
-    OrderlyPayPalIpnBundleNoEmail:
-        resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
-        type:     annotation
-        prefix:   /ipn/
+```bash
+OrderlyPayPalIpnBundleNoEmail:
+    resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
+    type:     annotation
+    prefix:   /ipn/
+```
 
 Your site will now be listening for incoming IPNs on:
 
@@ -197,6 +275,42 @@ If you have problems with any of your checks, then the next step is to manually 
 
 * Fix the bug
 * Repeat
+
+### 8. Full configuration
+
+```yaml
+# PaypalIpnBundle Configuration
+orderly_pay_pal_ipn:
+
+    # If set to false then service loads settings with "sandbox_" prefix
+    islive:  false
+
+    # Constants for the live environment (default settings in Configuration.php)
+    email:   sales@CHANGEME.com
+    url:     https://www.paypal.com/cgi-bin/webscr
+    debug:   %kernel.debug%
+
+    # Constants for the sandbox environment (default settings in Configuration.php)
+    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:   true
+
+    drivers: # Define one driver only.
+        orm:
+            object_manager: doctrine.orm.entity_manager
+            classes:
+                ipn_log: Orderly\PayPalIpnBundle\Entity\IpnLog
+                ipn_order_items: Orderly\PayPalIpnBundle\Entity\IpnOrderItems
+                ipn_orders: Orderly\PayPalIpnBundle\Entity\IpnOrders
+        # OR for MongoDB support
+        odm:
+            object_manager: doctrine.odm.mongodb.document_manager
+            classes:
+                ipn_log: Orderly\PayPalIpnBundle\Document\IpnLog
+                ipn_order_items: Orderly\PayPalIpnBundle\Document\IpnOrderItems
+                ipn_orders: Orderly\PayPalIpnBundle\Document\IpnOrders
+
+```
 
 ## Support and bugs
 

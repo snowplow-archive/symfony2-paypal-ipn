@@ -11,6 +11,10 @@
     <services>
         <service id="orderly_pay_pal_ipn" class="%orderly_pay_pal_ipn.class%">
             <argument type="service" id="service_container" />
+            <argument type="service" id="paypal_ipn.driver.object_manager" />
+            <argument>%paypal_ipn.class.ipn_log%</argument>
+            <argument>%paypal_ipn.class.ipn_orders%</argument>
+            <argument>%paypal_ipn.class.ipn_order_items%</argument>
         </service>
     </services>
 
