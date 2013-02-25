@@ -212,6 +212,7 @@ Many thanks to all the contributors to symfony2-paypal-ipn:
 * Contributor: [Strife] [strife]
 * Contributor: [Alex Dean] [alexdean]
 * Contributor: [Ivo Azirjans] [ivoaz]
+* Contributor: [Carles Climent] [carlescliment]
 
 ## Disclaimer and warning
 
@@ -264,3 +265,4 @@ limitations under the License.
 [strife]: https://github.com/strife
 [alexdean]: https://github.com/alexanderdean
 [ivoaz]: https://github.com/ivoaz
+[carlescliment]: https://github.com/carlescliment
