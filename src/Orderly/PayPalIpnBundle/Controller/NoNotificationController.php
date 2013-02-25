@@ -40,7 +40,7 @@ class NoNotificationController extends Controller
     {
         //getting ipn service registered in container
         $this->paypal_ipn = $this->get('orderly_pay_pal_ipn');
-        
+
         //validate ipn (generating response on PayPal IPN request)
         if ($this->paypal_ipn->validateIPN())
         {

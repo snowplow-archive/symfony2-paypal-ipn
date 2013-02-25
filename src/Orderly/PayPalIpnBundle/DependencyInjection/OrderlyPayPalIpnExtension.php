@@ -38,7 +38,6 @@ class OrderlyPayPalIpnExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
 
         $container->setParameter('orderly.paypalipn.islive', $config['islive']);
         
@@ -53,6 +52,63 @@ class OrderlyPayPalIpnExtension extends Extension
             $container->setParameter('orderly.paypalipn.email', $config['sandbox_email']);
             $container->setParameter('orderly.paypalipn.url', $config['sandbox_url']);
             $container->setParameter('orderly.paypalipn.debug', $config['sandbox_debug']);
+        }
+
+        $driver = null;
+        if (isset($config['drivers']))
+        {
+
+            if (isset($config['drivers']['orm']))
+            {
+                $this->loadORMDriver($container, $loader, $config['drivers']['orm']);
+                $driver = 'orm';
+            }
+            elseif(isset($config['drivers']['odm']))
+            {
+                $this->loadODMDriver($container, $loader, $config['drivers']['odm']);
+                $driver = 'odm';
+            }
+        }
+
+        $loader->load('services.xml');
+    }
+
+    private function loadORMDriver($container, $loader, $config)
+    {
+        $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        $params = array(
+            "ipn_log","ipn_order_items","ipn_orders"
+        );
+
+        $container->setAlias('paypal_ipn.driver.object_manager', $config['object_manager']);
+
+        foreach($params as $param)
+        {
+            if (isset($classes[$param]))
+            {
+                $container->setParameter(sprintf('paypal_ipn.class.%s', $param), $classes[$param]);
+            }
+        }
+    }
+
+    private function loadODMDriver($container, $loader, $config)
+    {
+
+        $classes = isset($config['classes']) ? $config['classes'] : array();
+
+        $params = array(
+            "ipn_log","ipn_order_items","ipn_orders"
+        );
+
+        $container->setAlias('paypal_ipn.driver.object_manager', $config['object_manager']);
+
+        foreach($params as $param)
+        {
+            if (isset($classes[$param]))
+            {
+                $container->setParameter(sprintf('paypal_ipn.class.%s', $param), $classes[$param]);
+            }
         }
     }
 }

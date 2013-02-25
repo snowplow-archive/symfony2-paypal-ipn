@@ -28,19 +28,89 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-            $treeBuilder->root('orderly_pay_pal_ipn', 'array')
-                ->children()
-                    ->booleanNode('islive')->defaultValue(true)->end()
-                    ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('url')->defaultValue('https://www.paypal.com/cgi-bin/webscr')->end()
-                    ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
-                    ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()
-                    ->booleanNode('sandbox_debug')->defaultValue(true)->end()
-                ->end()
+        $tb = new TreeBuilder();
+        $rootNode = $tb->root('orderly_pay_pal_ipn');
+
+        $this->addDriverSection($rootNode);
+
+        $rootNode->children()
+                ->booleanNode('islive')->defaultValue(true)->end()
+                ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('url')->defaultValue('https://www.paypal.com/cgi-bin/webscr')->end()
+                ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
+                ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()
+                ->booleanNode('sandbox_debug')->defaultValue(true)->end()
             ->end()
-            ->buildTree();
-        return $treeBuilder;
+        ->end();
+
+        return $tb;
+    }
+
+    protected function addDriverSection($rootNode)
+    {
+        $rootNode
+            ->validate()
+                ->ifTrue(function($v) {
+                    return !isset($v['drivers']) || (count($v['drivers']) == 0);
+                })
+                ->thenInvalid("Please define a driver")
+            ->end()
+            ->children()
+                ->arrayNode('drivers')
+                    ->validate()
+                        ->ifTrue(function($v) {
+                            return count($v) > 1;
+                        })
+                        ->thenInvalid('Please define only one driver.')
+                    ->end()
+                    ->children()
+                        ->arrayNode('orm')
+                            ->children()
+                                ->scalarNode('object_manager')
+                                    ->isRequired()
+                                    ->cannotBeEmpty()
+                                    ->example('doctrine.orm.entity_manager')
+                                ->end()
+                                ->arrayNode('classes')
+                                    ->children()
+                                        ->scalarNode('ipn_log')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Entity\IpnLog')
+                                        ->end()
+                                        ->scalarNode('ipn_order_items')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Entity\IpnOrderItems')
+                                        ->end()
+                                        ->scalarNode('ipn_orders')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Entity\IpnOrders')
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('odm')
+                            ->children()
+                                ->scalarNode('object_manager')
+                                    ->isRequired()
+                                    ->cannotBeEmpty()
+                                    ->example('doctrine.odm.mongodb.document_manager')
+                                ->end()
+                                ->arrayNode('classes')
+                                    ->children()
+                                        ->scalarNode('ipn_log')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Document\IpnLog')
+                                        ->end()
+                                        ->scalarNode('ipn_order_items')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Document\IpnOrderItems')
+                                        ->end()
+                                        ->scalarNode('ipn_orders')
+                                            ->defaultValue('Orderly\PayPalIpnBundle\Document\IpnOrders')
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }
