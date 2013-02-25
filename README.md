@@ -241,7 +241,12 @@ After an IPN is received and if it is a valid one, an event with the incoming IP
 
 Now you just need to code your custom listener
 
-    class PayPalListener {
+    namespace Your\OwnBundle\Event;
+
+    use Orderly\PayPalIpnBundle\Event\PayPalEvent;
+    use Doctrine\Common\Persistence\ObjectManager;
+
+    class YourPayPalListener {
 
         private $om;
 
