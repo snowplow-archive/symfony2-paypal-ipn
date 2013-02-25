@@ -240,7 +240,7 @@ If you have problems with any of your checks, then the next step is to manually 
 * Fix the bug
 * Repeat
 
-### 7. Full configuration
+### 8. Full configuration
 
 ```yaml
 # PaypalIpnBundle Configuration
@@ -266,7 +266,7 @@ orderly_pay_pal_ipn:
                 ipn_log: Orderly\PayPalIpnBundle\Entity\IpnLog
                 ipn_order_items: Orderly\PayPalIpnBundle\Entity\IpnOrderItems
                 ipn_orders: Orderly\PayPalIpnBundle\Entity\IpnOrders
-        # OR
+        # OR for MongoDB support
         odm:
             object_manager: doctrine.odm.mongodb.document_manager
             classes:
