@@ -78,14 +78,13 @@ class Ipn
     private $transactionID; // The transaction ID aka txn_id (from PayPal)
     private $transactionType; // The type of transaction (from PayPal)
 
+    private $objectManager; // Object Manger holding reference to DB-Driver
+
     // Payment status constants we use, more user-friendly than the PayPal ones
     const PAID = 'PAID';
     const WAITING = 'WAITING';
     const REJECTED = 'REJECTED';
     const REFUNDED = 'REFUNDED';
-
-
-    private $objectManager;
 
     /** The constructor. Loads the helpers and configuration files, sets the configuration constants
      *
