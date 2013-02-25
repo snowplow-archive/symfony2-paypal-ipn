@@ -128,6 +128,24 @@ Your site will now be listening for incoming Instant Payment Notifications on th
 Note that the sample email template provided depends on Twig's [`number_format`] [numberformat] filter, which was added in December 2012 (you may need to update your Twig version to use this). Don't forget to tell PayPal about your new PayPal IPN URL.
 
 
+#### To log orders but not send notifications
+
+Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
+
+    OrderlyPayPalIpnBundleNoEmail:
+        resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
+        type:     annotation
+        prefix:   /ipn/
+
+Your site will now be listening for incoming IPNs on:
+
+    http://{{YOUR DOMAIN}}/ipn/ipn-no-notification
+
+Don't forget to tell PayPal about your new PayPal IPN URL.
+
+**Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
+
+
 
 ### 6. Subscribing to events (if you need custom processing)
 
@@ -162,22 +180,6 @@ Now you just need to code your custom listener
 
 
 
-#### To log orders but not send notifications
-
-Alternatively if you just want to log orders in the database (and not send out any notifications), then add in this controller:
-
-    OrderlyPayPalIpnBundleNoEmail:
-        resource: "@OrderlyPayPalIpnBundle/Controller/NoNotificationController.php"
-        type:     annotation
-        prefix:   /ipn/
-
-Your site will now be listening for incoming IPNs on:
-
-    http://{{YOUR DOMAIN}}/ipn/ipn-no-notification
-
-Don't forget to tell PayPal about your new PayPal IPN URL.
-
-**Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
 
 ### 7. Test and troubleshoot
 
