@@ -221,7 +221,7 @@ class Ipn
             return FALSE;
         }
         
-        //Check if IPN is an subscription signup notification
+        // Check if IPN is an subscription signup notification
         // because subscription signups don't have a payment_status
         if (isset($this->ipnData['txn_type']) && $this->ipnData['txn_type'] == 'subscr_signup'){
             $this->_logTransaction('IPN', 'SUCCESS', 'Subscription has been created', $ipnResponse);
