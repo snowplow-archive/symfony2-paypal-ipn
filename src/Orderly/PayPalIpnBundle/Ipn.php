@@ -66,7 +66,7 @@ class Ipn
     private $ipnData = array(); // Contains the POST values for IPN
     private $order = null; // Contains the fields pertaining to an order
     private $orderItems = array(); // Contains the order items within an order
-    private $orderStatus; // All-important variable: whether the order has been paid for yet or not
+    private $orderStatus = self::NOTPAID; // All-important variable: whether the order has been paid for yet or not
 
     // Configuration constants
     private $isLive; // The flag used to indicate we are operating in the live environment
@@ -81,6 +81,7 @@ class Ipn
     private $objectManager; // Object Manger holding reference to DB-Driver
 
     // Payment status constants we use, more user-friendly than the PayPal ones
+    const NOTPAID = 'NOTPAID';
     const PAID = 'PAID';
     const WAITING = 'WAITING';
     const REJECTED = 'REJECTED';
