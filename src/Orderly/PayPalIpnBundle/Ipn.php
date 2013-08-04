@@ -229,10 +229,10 @@ class Ipn
             return true;
         }
         
-        // Check if paypal submits a new case
+        // Check if paypal submits information regarding a case
         // because cases don't have a payment_status
-        if (isset($this->ipnData['txn_type']) && $this->ipnData['txn_type'] == 'new_case'){
-            $this->_logTransaction('IPN', 'SUCCESS', 'New case was logged', $ipnResponse);
+        if ((isset($this->ipnData['txn_type']) && ($this->ipnData['txn_type'] == 'new_case' || $this->ipnData['txn_type'] == 'adjustment')) || isset($this->ipnData['case_type']) && $this->ipnData['case_type'] == 'chargeback') {
+            $this->_logTransaction('IPN', 'SUCCESS', 'Case Information logged for transaction', $ipnResponse);
             return true;
         }
 
