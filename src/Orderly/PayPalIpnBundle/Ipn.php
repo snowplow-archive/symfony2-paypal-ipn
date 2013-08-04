@@ -228,6 +228,13 @@ class Ipn
             $this->_logTransaction('IPN', 'SUCCESS', 'Subscription has been created', $ipnResponse);
             return true;
         }
+        
+        // Check if paypal submits a new case
+        // because cases don't have a payment_status
+        if (isset($this->ipnData['txn_type']) && $this->ipnData['txn_type'] == 'new_case'){
+            $this->_logTransaction('IPN', 'SUCCESS', 'New case was logged', $ipnResponse);
+            return true;
+        }
 
         // The final check is of the payment status. We need to surface this
         // as a class variable so that the calling code can decide how to respond.
