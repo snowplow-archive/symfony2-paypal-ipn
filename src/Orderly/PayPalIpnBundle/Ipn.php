@@ -339,13 +339,13 @@ class Ipn
             // Reference: https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&content_ID=developer/e_howto_html_Appx_websitestandard_htmlvariables
             for ($ii = 1, $count = 7; $ii < $count; $ii++)
             {
-                if(isset($this->ipnData['option_name'.$ii.'_'.$suffix])) {
+                if(isset($this->ipnData['option_name'.$ii.$suffixUnderscore])) {
                     $method = 'setOptionName' . $ii;
-                    $this->orderItems[$i]->$method($this->ipnData['option_name'.$ii.'_'.$suffix]);
+                    $this->orderItems[$i]->$method($this->ipnData['option_name'.$ii.$suffixUnderscore]);
                 }
-                if(isset($this->ipnData['option_selection'.$ii.'_'.$suffix])) {
+                if(isset($this->ipnData['option_selection'.$ii.$suffixUnderscore])) {
                     $method = 'setOptionSelection' . $ii;
-                    $this->orderItems[$i]->$method($this->ipnData['option_selection'.$ii.'_'.$suffix]);
+                    $this->orderItems[$i]->$method($this->ipnData['option_selection'.$ii.$suffixUnderscore]);
                 }
             }
             
