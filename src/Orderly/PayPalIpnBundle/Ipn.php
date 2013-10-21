@@ -72,6 +72,7 @@ class Ipn
     private $isLive; // The flag used to indicate we are operating in the live environment
     private $ipnURL; // The PayPal IPN URL we're using
     private $merchantEmail; // The merchant's email address connected to PayPal
+    private $mockResponse; // Mock the return response from Paypal, if present, we won't hit the server
 
     // Used for logging
     private $logID; // The ID of our IpnLog record
@@ -102,6 +103,7 @@ class Ipn
         $this->merchantEmail = $this->_sc->getParameter('orderly.paypalipn.email');
         $this->debug = $this->_sc->getParameter('orderly.paypalipn.debug');
         $this->isLive = $this->_sc->getParameter('orderly.paypalipn.islive');
+        $this->mockResponse = $this->_sc->getParameter('orderly.paypalipn.response');
 
         // Class instance
         $this->clsIpnLog = $ipnLog;
@@ -369,6 +371,10 @@ class Ipn
      */
     function _postData($url, $postData)
     {
+        if ($this->mockResponse !== null) {
+            return $this->mockResponse;
+        }
+
         // Put the postData into a string
         $postString = '';
         foreach ($postData as $field=>$value) {

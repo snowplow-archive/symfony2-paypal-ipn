@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()
                 ->booleanNode('sandbox_debug')->defaultValue(true)->end()
+                ->scalarNode('sandbox_response')->defaultValue(null)->end()
             ->end()
         ->end();
 

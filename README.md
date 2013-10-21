@@ -69,7 +69,7 @@ With the PayPalIPN Bundle you have the choice of storing your date in a  rationa
 The next section provides information on how to use the two different systems.
 
 #### 3.1  Deploy the database tables using ORM (MySQL)
-If you´e going to use a rational database system like MySQL you have to configure the driver to use a doctrine ORM.
+If you're going to use a rational database system like MySQL you have to configure the driver to use a doctrine ORM.
 You can achive this by adding the following configuration to your bundles configuration:
 
 ```yaml
@@ -139,9 +139,10 @@ orderly_pay_pal_ipn:
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_debug:   true
+    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:    true
+    sandbox_response: VERIFIED
 
     drivers:
         orm:
@@ -150,6 +151,8 @@ orderly_pay_pal_ipn:
 ```
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
+
+The value of `sandbox_response` allows you to mock Paypal's response. This is available only when `islive` is set to false. If you don't set its value, your server will hit the Paypal server and most likely return INVALID.
 
 A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the `validateIPN()` IPN handler is doing.
 
@@ -170,9 +173,10 @@ orderly_pay_pal_ipn:
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_debug:   true
+    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:    true
+    sandbox_response: VERIFIED
 
     drivers:
         odm:
@@ -296,9 +300,10 @@ orderly_pay_pal_ipn:
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:   system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:     https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_debug:   true
+    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_debug:    true
+    sandbox_response: VERIFIED
 
     drivers: # Define one driver only.
         orm:
