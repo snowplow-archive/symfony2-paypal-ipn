@@ -25,7 +25,7 @@ All pre-payment functionality (e.g. posting the checkout information to PayPal) 
 
 ## Dependencies
 
-The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2] and [Doctrine 2.0] [doctrine2.0].
+The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], [Doctrine 2.0] [doctrine2.0], and curl.
 
 An example order confirmation email which uses the [Twig] [twig] templating language is also provided. 
 
@@ -136,11 +136,13 @@ orderly_pay_pal_ipn:
     # Constants for the live environment (default settings in Configuration.php)
     email:   sales@CHANGEME.com
     url:     https://www.paypal.com/cgi-bin/webscr
+    proxy:   ~
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
     sandbox_email:    system_CHANGEME_biz@CHANGEME.com
     sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:    ~
     sandbox_debug:    true
     sandbox_response: VERIFIED
 
@@ -170,11 +172,13 @@ orderly_pay_pal_ipn:
     # Constants for the live environment (default settings in Configuration.php)
     email:   sales@CHANGEME.com
     url:     https://www.paypal.com/cgi-bin/webscr
+    proxy:   ~
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
     sandbox_email:    system_CHANGEME_biz@CHANGEME.com
     sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:    ~
     sandbox_debug:    true
     sandbox_response: VERIFIED
 
@@ -297,11 +301,13 @@ orderly_pay_pal_ipn:
     # Constants for the live environment (default settings in Configuration.php)
     email:   sales@CHANGEME.com
     url:     https://www.paypal.com/cgi-bin/webscr
+    proxy:   ~
     debug:   %kernel.debug%
 
     # Constants for the sandbox environment (default settings in Configuration.php)
     sandbox_email:    system_CHANGEME_biz@CHANGEME.com
     sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:    ~
     sandbox_debug:    true
     sandbox_response: VERIFIED
 

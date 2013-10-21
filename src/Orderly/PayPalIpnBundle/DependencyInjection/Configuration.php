@@ -37,11 +37,13 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('islive')->defaultValue(true)->end()
                 ->scalarNode('email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('url')->defaultValue('https://www.paypal.com/cgi-bin/webscr')->end()
+                ->scalarNode('proxy')->defaultValue(null)->end()
                 ->booleanNode('debug')->defaultValue('%kernel.debug%')->end()
                 ->scalarNode('sandbox_email')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('sandbox_url')->defaultValue('https://www.sandbox.paypal.com/cgi-bin/webscr')->end()
                 ->booleanNode('sandbox_debug')->defaultValue(true)->end()
                 ->scalarNode('sandbox_response')->defaultValue(null)->end()
+                ->scalarNode('sandbox_proxy')->defaultValue(null)->end()
             ->end()
         ->end();
 
