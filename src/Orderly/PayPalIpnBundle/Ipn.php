@@ -72,6 +72,7 @@ class Ipn
     private $isLive; // The flag used to indicate we are operating in the live environment
     private $ipnURL; // The PayPal IPN URL we're using
     private $merchantEmail; // The merchant's email address connected to PayPal
+    private $proxyUrl; // Proxy URL to connect to in order to talk with Paypal
 
     // Used for logging
     private $logID; // The ID of our IpnLog record
@@ -102,6 +103,7 @@ class Ipn
         $this->merchantEmail = $this->_sc->getParameter('orderly.paypalipn.email');
         $this->debug = $this->_sc->getParameter('orderly.paypalipn.debug');
         $this->isLive = $this->_sc->getParameter('orderly.paypalipn.islive');
+        $this->proxyUrl = $this->_sc->getParameter('orderly.paypalipn.proxy');
 
         // Class instance
         $this->clsIpnLog = $ipnLog;
@@ -199,7 +201,7 @@ class Ipn
         }
 
         // Check that PayPal says that the IPN call we received is not invalid
-        if (stristr("INVALID", $ipnResponse)) {
+        if ($ipnResponse === "INVALID") {
             // Invalid IPN transaction.  Check the log for details.
             $this->_logTransaction('IPN', 'ERROR', 'PayPal rejected the IPN call as invalid - potentially call was spoofed or was not checked within 30s', $ipnResponse);
             
@@ -375,42 +377,38 @@ class Ipn
             $postString .= $field . '=' . urlencode(stripslashes($value)) . '&'; // Trailing & at end of post string is forgivable
         }
 
-        $parsedURL = parse_url($url);
+        $curl = \curl_init();
+        \curl_setopt($curl, CURLOPT_URL, $url);
+        \curl_setopt($curl, CURLOPT_POST, 1);
+        \curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        \curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+        \curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 
-        // fsockopen is a bit odd - it just takes the host without the scheme - unless you want to use
-        // ssl, in which case you need to use ssl://, not http://
-        $ipnURL = ($parsedURL['scheme'] == "https") ? "ssl://" . $parsedURL['host'] : $parsedURL['host'];
-        // Likewise, if using ssl, then need to change port from 80 to 443
-        $ipnPort = ($parsedURL['scheme'] == "https") ? 443 : 80;
-        $fp = @fsockopen($ipnURL, $ipnPort, $errorNumber, $errorString, 30);
+        if (!empty($this->proxyUrl)) {
+            \curl_setopt($curl, CURLOPT_PROXYTYPE, CURLPROXY_HTTP);
+            \curl_setopt($curl, CURLOPT_PROXY, $this->proxyUrl);
+        }
+
+        \curl_setopt($curl, CURLOPT_POSTFIELDS, $postString);
+
+        $response = \curl_exec($curl);
 
         // Log and return if we have an error
-        if (!$fp) {
-            $this->_logTransaction("IPN", "ERROR", "fsockopen error number $errorNumber: $errorString connecting to " . $parsedURL['host'] . " on port " . $ipnPort);
+        if (\curl_error($curl)) {
+            $this->_logTransaction("IPN", "ERROR", "curl error number " . \curl_errno($curl) . ": " . \curl_error($curl) . " connecting to " . $url);
             
             return FALSE;
         }
 
-        fputs($fp, "POST $parsedURL[path] HTTP/1.1\r\n");
-        fputs($fp, "Host: $parsedURL[host]\r\n");
-        fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
-        fputs($fp, "Content-length: " . strlen($postString) . "\r\n");
-        fputs($fp, "Connection: close\r\n\r\n");
-        fputs($fp, $postString . "\r\n\r\n");
+        \curl_close($curl);
 
-        $response = '';
-        while (!feof($fp)) {
-            $response .= fgets($fp, 1024);
+        if (preg_match("/^(VERIFIED|INVALID)$/", $response, $matches)) {
+            return $matches[1];
         }
-        fclose($fp); // Close connection
 
-        if (strlen($response) == 0) {
-            $this->_logTransaction("IPN", "ERROR", "Response from PayPal was empty");
+        $this->_logTransaction("IPN", "ERROR", "Response from PayPal was invalid: " . $response);
             
             return FALSE;
-        }
-
-        return $response;
     }
 
     /** 
