@@ -23,6 +23,8 @@ This library handles:
 
 All pre-payment functionality (e.g. posting the checkout information to PayPal) and custom post-payment workflow (e.g. sending emails) is left as an exercise for the reader. If you require a more general-purpose Symfony2 toolkit for working with PayPal, please see the [JMSPaymentPaypalBundle] [jmspaymentbundle].
 
+This library also support getting the status from the Payment Data Transfer (PDT).
+
 ## Dependencies
 
 The Symfony PayPal IPN Bundle depends on [Symfony2] [symfony2], [Doctrine 2.0] [doctrine2.0], and curl.
@@ -134,17 +136,22 @@ orderly_pay_pal_ipn:
     islive:  false
 
     # Constants for the live environment (default settings in Configuration.php)
-    email:   sales@CHANGEME.com
-    url:     https://www.paypal.com/cgi-bin/webscr
-    proxy:   ~
-    debug:   %kernel.debug%
+    email:    sales@CHANGEME.com
+    url:      https://www.paypal.com/cgi-bin/webscr
+    proxy:    ~
+    debug:    %kernel.debug%
+    pdttoken: pdt-token
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_proxy:    ~
-    sandbox_debug:    true
-    sandbox_response: VERIFIED
+    sandbox_email:       system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:         https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:       ~
+    sandbox_debug:       true
+    sandbox_response:    VERIFIED
+    sandbox_pdttoken:    pdt-token
+    sandbox_pdtresponse:
+        payment_status: Completed
+        mc_gross: 123.00
 
     drivers:
         orm:
@@ -154,7 +161,10 @@ orderly_pay_pal_ipn:
 
 Make sure to update the `email` and `sandbox_email` settings to your own PayPal account's.
 
-The value of `sandbox_response` allows you to mock Paypal's response. This is available only when `islive` is set to false. If you don't set its value, your server will hit the Paypal server and most likely return INVALID.
+When `islive` is set to false, the following configuration can be activated:
+
+* `sandbox_response` allows you to mock IPN Paypal's response. If you don't set its value, your server will hit the Paypal server and most likely return INVALID.
+* `sandbox_pdtresponse` allows you to mock PDT Paypal's response. If you don't set its value, your server will hit the Paypal server and most likely return FAIL. To mock the value, simply pass in a list of key value pair the server would return.
 
 A note on the `debug` setting: if set to true, then PayPalIpnBundle will store the last IPN access which had IPN data (i.e. POST variables) into the database. Then when you access the IPN URL directly without data, it reloads the cached data. So it's effectively a "replay" mode which let's you directly inspect what the `validateIPN()` IPN handler is doing.
 
@@ -170,17 +180,22 @@ orderly_pay_pal_ipn:
     islive:  false
 
     # Constants for the live environment (default settings in Configuration.php)
-    email:   sales@CHANGEME.com
-    url:     https://www.paypal.com/cgi-bin/webscr
-    proxy:   ~
-    debug:   %kernel.debug%
+    email:    sales@CHANGEME.com
+    url:      https://www.paypal.com/cgi-bin/webscr
+    proxy:    ~
+    debug:    %kernel.debug%
+    pdttoken: pdt-token
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_proxy:    ~
-    sandbox_debug:    true
-    sandbox_response: VERIFIED
+    sandbox_email:       system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:         https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:       ~
+    sandbox_debug:       true
+    sandbox_response:    VERIFIED
+    sandbox_pdttoken:    pdt-token
+    sandbox_pdtresponse:
+        payment_status: Completed
+        mc_gross: 123.00
 
     drivers:
         odm:
@@ -231,6 +246,40 @@ Don't forget to tell PayPal about your new PayPal IPN URL.
 
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
 
+#### To receive PDT variables
+
+This is an example of what your PDT call would look like.
+
+```php
+namespace Your\OwnBundle;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class YourPaypalController extends Controller {
+    /**
+     * Your return action from Paypal.
+     */
+    public function completeAction() {
+        $tx = $this->getRequest()->get('tx');
+        if (!$tx) {
+            // Redirect to a non-found page
+            return $this->redirect($this->generateUrl('notFound'));
+        }
+
+        $pdt = $this->get('orderly_pay_pal_pdt');
+        $pdtArray = $pdt->getPdt($tx);
+
+        $status = 'unknown';
+        if (isset($pdtArray['payment_status'])) {
+            $status = $pdtArray['payment_status'];
+        }
+
+        return $this->render('YourOwnBundle:YourPaypal:complete.html.twig',
+            array('status' => $status)
+        );
+    }
+}
+```
 
 
 ### 6. Subscribing to events (if you need custom processing)
@@ -299,17 +348,22 @@ orderly_pay_pal_ipn:
     islive:  false
 
     # Constants for the live environment (default settings in Configuration.php)
-    email:   sales@CHANGEME.com
-    url:     https://www.paypal.com/cgi-bin/webscr
-    proxy:   ~
-    debug:   %kernel.debug%
+    email:    sales@CHANGEME.com
+    url:      https://www.paypal.com/cgi-bin/webscr
+    proxy:    ~
+    debug:    %kernel.debug%
+    pdttoken: pdt-token
 
     # Constants for the sandbox environment (default settings in Configuration.php)
-    sandbox_email:    system_CHANGEME_biz@CHANGEME.com
-    sandbox_url:      https://www.sandbox.paypal.com/cgi-bin/webscr
-    sandbox_proxy:    ~
-    sandbox_debug:    true
-    sandbox_response: VERIFIED
+    sandbox_email:       system_CHANGEME_biz@CHANGEME.com
+    sandbox_url:         https://www.sandbox.paypal.com/cgi-bin/webscr
+    sandbox_proxy:       ~
+    sandbox_debug:       true
+    sandbox_response:    VERIFIED
+    sandbox_pdttoken:    pdt-token
+    sandbox_pdtresponse:
+        payment_status: Completed
+        mc_gross: 123.00
 
     drivers: # Define one driver only.
         orm:

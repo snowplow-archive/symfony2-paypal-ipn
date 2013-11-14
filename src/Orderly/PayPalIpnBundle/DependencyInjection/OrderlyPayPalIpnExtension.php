@@ -47,6 +47,8 @@ class OrderlyPayPalIpnExtension extends Extension
             $container->setParameter('orderly.paypalipn.url', $config['url']);
             $container->setParameter('orderly.paypalipn.debug', $config['debug']);
             $container->setParameter('orderly.paypalipn.response', null);
+            $container->setParameter('orderly.paypalipn.pdttoken', $config['pdttoken']);
+            $container->setParameter('orderly.paypalipn.pdtresponse', null);
             $container->setParameter('orderly.paypalipn.proxy', $config['proxy']);
         }
         else
@@ -55,6 +57,8 @@ class OrderlyPayPalIpnExtension extends Extension
             $container->setParameter('orderly.paypalipn.url', $config['sandbox_url']);
             $container->setParameter('orderly.paypalipn.debug', $config['sandbox_debug']);
             $container->setParameter('orderly.paypalipn.response', $config['sandbox_response']);
+            $container->setParameter('orderly.paypalipn.pdttoken', $config['sandbox_pdttoken']);
+            $container->setParameter('orderly.paypalipn.pdtresponse', $config['sandbox_pdtresponse']);
             $container->setParameter('orderly.paypalipn.proxy', $config['sandbox_proxy']);
         }
 
