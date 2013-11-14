@@ -74,6 +74,7 @@ class Ipn
     private $merchantEmail; // The merchant's email address connected to PayPal
     private $mockResponse; // Mock the return response from Paypal, if present, we won't hit the server
     private $proxyUrl; // Proxy URL to connect to in order to talk with Paypal
+    private $debug; // Debug flag
 
     // Used for logging
     private $logID; // The ID of our IpnLog record
@@ -402,7 +403,7 @@ class Ipn
         // Log and return if we have an error
         if (\curl_error($curl)) {
             $this->_logTransaction("IPN", "ERROR", "curl error number " . \curl_errno($curl) . ": " . \curl_error($curl) . " connecting to " . $url);
-            
+
             return FALSE;
         }
 
@@ -413,8 +414,8 @@ class Ipn
         }
 
         $this->_logTransaction("IPN", "ERROR", "Response from PayPal was invalid: " . $response);
-            
-            return FALSE;
+
+        return FALSE;
     }
 
     /** 
