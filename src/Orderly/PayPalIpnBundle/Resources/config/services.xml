@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="orderly_pay_pal_ipn.class">Orderly\PayPalIpnBundle\Ipn</parameter>
+        <parameter key="orderly_pay_pal_pdt.class">Orderly\PayPalIpnBundle\Pdt</parameter>
     </parameters>
 
     <services>
@@ -15,6 +16,11 @@
             <argument>%paypal_ipn.class.ipn_log%</argument>
             <argument>%paypal_ipn.class.ipn_orders%</argument>
             <argument>%paypal_ipn.class.ipn_order_items%</argument>
+        </service>
+        <service id="orderly_pay_pal_pdt" class="%orderly_pay_pal_pdt.class%">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="paypal_ipn.driver.object_manager" />
+            <argument>%paypal_ipn.class.ipn_log%</argument>
         </service>
     </services>
 
