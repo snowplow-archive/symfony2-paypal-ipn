@@ -41,7 +41,7 @@ class IpnOrders
      * @var string $notifyVersion
      *
      * @MongoDB\Field(name="notify_version", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $notifyVersion;
 
@@ -49,7 +49,7 @@ class IpnOrders
      * @var string $verifySign
      *
      * @MongoDB\Field(name="verify_sign", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $verifySign;
 
@@ -64,7 +64,7 @@ class IpnOrders
      * @var string $protectionEligibility
      *
      * @MongoDB\Field(name="protection_eligibility", type="string")
-     * @Assert\MaxLength(24)
+     * @Assert\Length(max=24)
      */
     private $protectionEligibility;
 
@@ -72,7 +72,7 @@ class IpnOrders
      * @var string $charset
      *
      * @MongoDB\Field(name="charset", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $charset;
 
@@ -80,7 +80,7 @@ class IpnOrders
      * @var string $btnId
      *
      * @MongoDB\Field(name="btn_id", type="string")
-     * @Assert\MaxLength(40)
+     * @Assert\Length(max=40)
      */
     private $btnId;
 
@@ -88,7 +88,7 @@ class IpnOrders
      * @var string $addressCity
      *
      * @MongoDB\Field(name="address_city", type="string")
-     * @Assert\MaxLength(40)
+     * @Assert\Length(max=40)
      */
     private $addressCity;
 
@@ -96,7 +96,7 @@ class IpnOrders
      * @var string $addressCountry
      *
      * @MongoDB\Field(name="address_country", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $addressCountry;
 
@@ -104,7 +104,7 @@ class IpnOrders
      * @var string $addressCountryCode
      *
      * @MongoDB\Field(name="address_country_code", type="string")
-     * @Assert\MaxLength(2)
+     * @Assert\Length(max=2)
      */
     private $addressCountryCode;
 
@@ -112,7 +112,7 @@ class IpnOrders
      * @var string $addressName
      *
      * @MongoDB\Field(name="address_name", type="string")
-     * @Assert\MaxLength(128)
+     * @Assert\Length(max=128)
      */
     private $addressName;
 
@@ -120,7 +120,7 @@ class IpnOrders
      * @var string $addressState
      *
      * @MongoDB\Field(name="address_state", type="string")
-     * @Assert\MaxLength(40)
+     * @Assert\Length(max=40)
      */
     private $addressState;
 
@@ -128,7 +128,7 @@ class IpnOrders
      * @var string $addressStatus
      *
      * @MongoDB\Field(name="address_status", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $addressStatus;
 
@@ -136,7 +136,7 @@ class IpnOrders
      * @var string $addressStreet
      *
      * @MongoDB\Field(name="address_street", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $addressStreet;
 
@@ -144,7 +144,7 @@ class IpnOrders
      * @var string $addressZip
      *
      * @MongoDB\Field(name="address_zip", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $addressZip;
 
@@ -152,7 +152,7 @@ class IpnOrders
      * @var string $firstName
      *
      * @MongoDB\Field(name="first_name", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $firstName;
 
@@ -160,7 +160,7 @@ class IpnOrders
      * @var string $lastName
      *
      * @MongoDB\Field(name="last_name", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $lastName;
 
@@ -168,7 +168,7 @@ class IpnOrders
      * @var string $payerBusinessName
      *
      * @MongoDB\Field(name="payer_business_name", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $payerBusinessName;
 
@@ -176,7 +176,7 @@ class IpnOrders
      * @var string $payerEmail
      *
      * @MongoDB\Field(name="payer_email", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $payerEmail;
 
@@ -184,7 +184,7 @@ class IpnOrders
      * @var string $payerId
      *
      * @MongoDB\Field(name="payer_id", type="string")
-     * @Assert\MaxLength(13)
+     * @Assert\Length(max=13)
      */
     private $payerId;
 
@@ -192,7 +192,7 @@ class IpnOrders
      * @var string $payerStatus
      *
      * @MongoDB\Field(name="payer_status", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $payerStatus;
 
@@ -200,7 +200,7 @@ class IpnOrders
      * @var string $contactPhone
      *
      * @MongoDB\Field(name="contact_phone", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $contactPhone;
 
@@ -208,7 +208,7 @@ class IpnOrders
      * @var string $residenceCountry
      *
      * @MongoDB\Field(name="residence_country", type="string")
-     * @Assert\MaxLength(2)
+     * @Assert\Length(max=2)
      */
     private $residenceCountry;
 
@@ -216,7 +216,7 @@ class IpnOrders
      * @var string $business
      *
      * @MongoDB\Field(name="business", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $business;
 
@@ -224,7 +224,7 @@ class IpnOrders
      * @var string $receiverEmail
      *
      * @MongoDB\Field(name="receiver_email", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $receiverEmail;
 
@@ -232,7 +232,7 @@ class IpnOrders
      * @var string $receiverId
      *
      * @MongoDB\Field(name="receiver_id", type="string")
-     * @Assert\MaxLength(13)
+     * @Assert\Length(max=13)
      */
     private $receiverId;
 
@@ -240,7 +240,7 @@ class IpnOrders
      * @var string $custom
      *
      * @MongoDB\Field(name="custom", type="string")
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $custom;
 
@@ -248,7 +248,7 @@ class IpnOrders
      * @var string $invoice
      *
      * @MongoDB\Field(name="invoice", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $invoice;
 
@@ -256,7 +256,7 @@ class IpnOrders
      * @var string $memo
      *
      * @MongoDB\Field(name="memo", type="string")
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $memo;
 
@@ -271,7 +271,7 @@ class IpnOrders
      * @var string $authId
      *
      * @MongoDB\Field(name="auth_id", type="string")
-     * @Assert\MaxLength(19)
+     * @Assert\Length(max=19)
      */
     private $authId;
 
@@ -279,7 +279,7 @@ class IpnOrders
      * @var string $authExp
      *
      * @MongoDB\Field(name="auth_exp", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $authExp;
 
@@ -294,7 +294,7 @@ class IpnOrders
      * @var string $authStatus
      *
      * @MongoDB\Field(name="auth_status", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $authStatus;
 
@@ -309,7 +309,7 @@ class IpnOrders
      * @var string $parentTxnId
      *
      * @MongoDB\Field(name="parent_txn_id", type="string")
-     * @Assert\MaxLength(19)
+     * @Assert\Length(max=19)
      */
     private $parentTxnId;
 
@@ -317,7 +317,7 @@ class IpnOrders
      * @var string $paymentDate
      *
      * @MongoDB\Field(name="payment_date", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $paymentDate;
 
@@ -325,7 +325,7 @@ class IpnOrders
      * @var string $paymentStatus
      *
      * @MongoDB\Field(name="payment_status", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $paymentStatus;
 
@@ -333,7 +333,7 @@ class IpnOrders
      * @var string $paymentType
      *
      * @MongoDB\Field(name="payment_type", type="string")
-     * @Assert\MaxLength(10)
+     * @Assert\Length(max=10)
      */
     private $paymentType;
 
@@ -341,7 +341,7 @@ class IpnOrders
      * @var string $pendingReason
      *
      * @MongoDB\Field(name="pending_reason", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $pendingReason;
 
@@ -349,7 +349,7 @@ class IpnOrders
      * @var string $reasonCode
      *
      * @MongoDB\Field(name="reason_code", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $reasonCode;
 
@@ -364,7 +364,7 @@ class IpnOrders
      * @var string $shippingMethod
      *
      * @MongoDB\Field(name="shipping_method", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $shippingMethod;
 
@@ -379,7 +379,7 @@ class IpnOrders
      * @var string $transactionEntity
      *
      * @MongoDB\Field(name="transaction_entity", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $transactionEntity;
 
@@ -387,7 +387,7 @@ class IpnOrders
      * @var string $txnId
      *
      * @MongoDB\Field(name="txn_id", type="string")
-     * @Assert\MaxLength(19)
+     * @Assert\Length(max=19)
      */
     private $txnId;
 
@@ -395,7 +395,7 @@ class IpnOrders
      * @var string $txnType
      *
      * @MongoDB\Field(name="txn_type", type="string")
-     * @Assert\MaxLength(20)
+     * @Assert\Length(max=20)
      */
     private $txnType;
 
@@ -410,7 +410,7 @@ class IpnOrders
      * @var string $mcCurrency
      *
      * @MongoDB\Field(name="mc_currency", type="string")
-     * @Assert\MaxLength(3)
+     * @Assert\Length(max=3)
      */
     private $mcCurrency;
 
@@ -474,7 +474,7 @@ class IpnOrders
      * @var string $auctionBuyerId
      *
      * @MongoDB\Field(name="auction_buyer_id", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $auctionBuyerId;
 
@@ -482,7 +482,7 @@ class IpnOrders
      * @var string $auctionClosingDate
      *
      * @MongoDB\Field(name="auction_closing_date", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $auctionClosingDate;
 
@@ -497,7 +497,7 @@ class IpnOrders
      * @var string $forAuction
      *
      * @MongoDB\Field(name="for_auction", type="string")
-     * @Assert\MaxLength(10)
+     * @Assert\Length(max=10)
      */
     private $forAuction;
 
@@ -505,7 +505,7 @@ class IpnOrders
      * @var string $subscrDate
      *
      * @MongoDB\Field(name="subscr_date", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $subscrDate;
 
@@ -513,7 +513,7 @@ class IpnOrders
      * @var string $subscrEffective
      *
      * @MongoDB\Field(name="subscr_effective", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $subscrEffective;
 
@@ -521,7 +521,7 @@ class IpnOrders
      * @var string $period1
      *
      * @MongoDB\Field(name="period1", type="string")
-     * @Assert\MaxLength(10)
+     * @Assert\Length(max=10)
      */
     private $period1;
 
@@ -529,7 +529,7 @@ class IpnOrders
      * @var string $period2
      *
      * @MongoDB\Field(name="period2", type="string")
-     * @Assert\MaxLength(10)
+     * @Assert\Length(max=10)
      */
     private $period2;
 
@@ -537,7 +537,7 @@ class IpnOrders
      * @var string $period3
      *
      * @MongoDB\Field(name="period3", type="string")
-     * @Assert\MaxLength(10)
+     * @Assert\Length(max=10)
      */
     private $period3;
 
@@ -587,7 +587,7 @@ class IpnOrders
      * @var string $recurring
      *
      * @MongoDB\Field(name="recurring", type="string")
-     * @Assert\MaxLength(1)
+     * @Assert\Length(max=1)
      */
     private $recurring;
 
@@ -595,7 +595,7 @@ class IpnOrders
      * @var string $reattempt
      *
      * @MongoDB\Field(name="reattempt", type="string")
-     * @Assert\MaxLength(1)
+     * @Assert\Length(max=1)
      */
     private $reattempt;
 
@@ -603,7 +603,7 @@ class IpnOrders
      * @var string $retryAt
      *
      * @MongoDB\Field(name="retry_at", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $retryAt;
 
@@ -618,7 +618,7 @@ class IpnOrders
      * @var string $username
      *
      * @MongoDB\Field(name="username", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $username;
 
@@ -626,7 +626,7 @@ class IpnOrders
      * @var string $password
      *
      * @MongoDB\Field(name="password", type="string")
-     * @Assert\MaxLength(24)
+     * @Assert\Length(max=24)
      */
     private $password;
 
@@ -634,7 +634,7 @@ class IpnOrders
      * @var string $subscrId
      *
      * @MongoDB\Field(name="subscr_id", type="string")
-     * @Assert\MaxLength(19)
+     * @Assert\Length(max=19)
      */
     private $subscrId;
 
@@ -642,7 +642,7 @@ class IpnOrders
      * @var string $caseId
      *
      * @MongoDB\Field(name="case_id", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $caseId;
 
@@ -650,7 +650,7 @@ class IpnOrders
      * @var string $caseType
      *
      * @MongoDB\Field(name="case_type", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $caseType;
 
@@ -658,7 +658,7 @@ class IpnOrders
      * @var string $caseCreationDate
      *
      * @MongoDB\Field(name="case_creation_date", type="string")
-     * @Assert\MaxLength(28)
+     * @Assert\Length(max=28)
      */
     private $caseCreationDate;
 
@@ -687,7 +687,7 @@ class IpnOrders
      * @var string $ipnTrackId
      *
      * @MongoDB\Field(name="ipn_track_id", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $ipnTrackId;
 
@@ -695,7 +695,7 @@ class IpnOrders
      * @var string $transactionSubject
      *
      * @MongoDB\Field(name="transaction_subject", type="string")
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $transactionSubject;
 

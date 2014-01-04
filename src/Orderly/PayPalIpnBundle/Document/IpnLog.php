@@ -41,7 +41,7 @@ class IpnLog
      * @var string $listenerName
      *
      * @MongoDB\Field(name="listener_name", type="string")
-     * @Assert\MaxLength(3)
+     * @Assert\Length(max=3)
      */
     private $listenerName;
 
@@ -49,7 +49,7 @@ class IpnLog
      * @var string $transactionType
      *
      * @MongoDB\Field(name="transaction_type", type="string")
-     * @Assert\MaxLength(16)
+     * @Assert\Length(max=16)
      */
     private $transactionType;
 
@@ -57,7 +57,7 @@ class IpnLog
      * @var string $transactionId
      *
      * @MongoDB\Field(name="transaction_id", type="string")
-     * @Assert\MaxLength(19)
+     * @Assert\Length(max=19)
      */
     private $transactionId;
 
@@ -65,7 +65,7 @@ class IpnLog
      * @var string $status
      *
      * @MongoDB\Field(name="status", type="string")
-     * @Assert\MaxLength(16)
+     * @Assert\Length(max=16)
      */
     private $status;
 
@@ -73,7 +73,7 @@ class IpnLog
      * @var string $message
      *
      * @MongoDB\Field(name="message", type="string")
-     * @Assert\MaxLength(512)
+     * @Assert\Length(max=512)
      */
     private $message;
 
@@ -81,7 +81,7 @@ class IpnLog
      * @var string $ipnDataHash
      *
      * @MongoDB\Field(name="ipn_data_hash", type="string")
-     * @Assert\MaxLength(32)
+     * @Assert\Length(max=32)
      */
     private $ipnDataHash;
 

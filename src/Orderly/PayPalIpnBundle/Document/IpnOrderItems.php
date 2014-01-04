@@ -48,7 +48,7 @@ class IpnOrderItems
      * @var string $itemName
      *
      * @MongoDB\Field(name="item_name", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $itemName;
 
@@ -56,7 +56,7 @@ class IpnOrderItems
      * @var string $itemNumber
      *
      * @MongoDB\Field(name="item_number", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $itemNumber;
 
@@ -64,7 +64,7 @@ class IpnOrderItems
      * @var string $quantity
      *
      * @MongoDB\Field(name="quantity", type="string")
-     * @Assert\MaxLength(127)
+     * @Assert\Length(max=127)
      */
     private $quantity;
 
@@ -107,7 +107,7 @@ class IpnOrderItems
      * @var string $optionName1
      *
      * @MongoDB\Field(name="option_name_1", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName1;
 
@@ -115,7 +115,7 @@ class IpnOrderItems
      * @var string $optionSelection1
      *
      * @MongoDB\Field(name="option_selection_1", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection1;
 
@@ -123,7 +123,7 @@ class IpnOrderItems
      * @var string $optionName2
      *
      * @MongoDB\Field(name="option_name_2", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName2;
 
@@ -131,7 +131,7 @@ class IpnOrderItems
      * @var string $optionSelection2
      *
      * @MongoDB\Field(name="option_selection_2", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection2;
 
@@ -139,7 +139,7 @@ class IpnOrderItems
      * @var string $optionName3
      *
      * @MongoDB\Field(name="option_name_3", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName3;
 
@@ -147,7 +147,7 @@ class IpnOrderItems
      * @var string $optionSelection3
      *
      * @MongoDB\Field(name="option_selection_3", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection3;
 
@@ -155,7 +155,7 @@ class IpnOrderItems
      * @var string $optionName4
      *
      * @MongoDB\Field(name="option_name_4", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName4;
 
@@ -163,7 +163,7 @@ class IpnOrderItems
      * @var string $optionSelection4
      *
      * @MongoDB\Field(name="option_selection_4", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection4;
 
@@ -171,7 +171,7 @@ class IpnOrderItems
      * @var string $optionName5
      *
      * @MongoDB\Field(name="option_name_5", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName5;
 
@@ -179,7 +179,7 @@ class IpnOrderItems
      * @var string $optionSelection5
      *
      * @MongoDB\Field(name="option_selection_5", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection5;
 
@@ -187,7 +187,7 @@ class IpnOrderItems
      * @var string $optionName6
      *
      * @MongoDB\Field(name="option_name_6", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName6;
 
@@ -195,7 +195,7 @@ class IpnOrderItems
      * @var string $optionSelection6
      *
      * @MongoDB\Field(name="option_selection_6", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection6;
 
@@ -203,7 +203,7 @@ class IpnOrderItems
      * @var string $optionName7
      *
      * @MongoDB\Field(name="option_name_7", type="string")
-     * @Assert\MaxLength(64)
+     * @Assert\Length(max=64)
      */
     private $optionName7;
 
@@ -211,7 +211,7 @@ class IpnOrderItems
      * @var string $optionSelection7
      *
      * @MongoDB\Field(name="option_selection_7", type="string")
-     * @Assert\MaxLength(200)
+     * @Assert\Length(max=200)
      */
     private $optionSelection7;
 
