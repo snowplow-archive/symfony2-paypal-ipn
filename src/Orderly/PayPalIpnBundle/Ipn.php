@@ -173,8 +173,10 @@ class Ipn
         foreach (array_keys($ipnDataRaw) as $field) {
             if (!$usingCache) {
                 $value = $request->request->get($field);
-                // Put line feeds back to \r\n for PayPal otherwise multi-line data will be rejected as INVALID
-                $ipnDataRaw[$field] = str_replace("\n", "\r\n", $value);
+                if(strpos($value, "\r\n") === false){
+                    // Put line feeds back to \r\n for PayPal otherwise multi-line data will be rejected as INVALID
+                    $ipnDataRaw[$field] = str_replace("\n", "\r\n", $value);
+                }
             }
 
             // Let's also store this in this class, turning empty strings back to null to avoid breaking Doctrine later
