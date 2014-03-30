@@ -66,6 +66,10 @@ and add the following line to the end of your `registerNamespaces()` invocation:
 
     'Orderly'          => __DIR__.'/../vendor/orderly/src',
 
+or if you are using a more recent version of Symfony (>2.4), add the following line right after the initialization of `$loader`:
+
+    $loader->add('Orderly', __DIR__.'/../vendor/orderly/src');
+
 ### 3. Deploy the database tables
 With the PayPalIPN Bundle you have the choice of storing your date in a  rational database like MySQL or to use MongoDB.
 The next section provides information on how to use the two different systems.
