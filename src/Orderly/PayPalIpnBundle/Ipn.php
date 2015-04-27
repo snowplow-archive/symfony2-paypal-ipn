@@ -215,7 +215,7 @@ class Ipn
 
         // The IPN transaction is a genuine one - now we need to validate its contents.
         // First we check that the receiver email matches our email address.
-        if ($this->ipnData['receiver_email'] != $this->merchantEmail) {
+        if ($this->merchantEmail && ($this->ipnData['receiver_email'] != $this->merchantEmail)) {
             $this->_logTransaction('IPN', 'ERROR', 'Receiver email ' . $this->ipnData['receiver_email'] . ' does not match merchant\'s email "'.$this->merchantEmail.'"', $ipnResponse);
             
             return FALSE;
@@ -602,5 +602,16 @@ class Ipn
     public function getOrderItems()
     {
         return $this->orderItems;
+    }
+    
+    /**
+     * Get ipnData['receiver_email']
+     *
+     * @return string
+     */
+    public function getReceiverEmailIPN()
+    {
+        
+        return (isset($this->ipnData['receiver_email']) ? $this->ipnData['receiver_email'] : null);
     }
 }
