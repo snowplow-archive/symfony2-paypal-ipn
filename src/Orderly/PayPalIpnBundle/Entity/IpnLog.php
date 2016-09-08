@@ -47,7 +47,7 @@ class IpnLog
     /**
      * @var string $transactionType
      *
-     * @ORM\Column(name="transaction_type", type="string", length=16, nullable=true)
+     * @ORM\Column(name="transaction_type", type="string", length=255, nullable=true)
      */
     private $transactionType;
 
