@@ -355,7 +355,7 @@ class IpnOrders
     /**
      * @var string $txnType
      *
-     * @ORM\Column(name="txn_type", type="string", length=20, nullable=true)
+     * @ORM\Column(name="txn_type", type="string", length=255, nullable=true)
      */
     private $txnType;
 

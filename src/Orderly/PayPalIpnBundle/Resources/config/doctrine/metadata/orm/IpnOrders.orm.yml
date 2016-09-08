@@ -268,7 +268,7 @@ IpnOrders:
       column: txn_id
     txnType:
       type: string
-      length: 20
+      length: 255
       fixed: false
       nullable: true
       column: txn_type

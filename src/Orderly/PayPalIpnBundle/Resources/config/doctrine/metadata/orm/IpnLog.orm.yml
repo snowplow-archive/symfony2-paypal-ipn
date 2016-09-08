@@ -17,7 +17,7 @@ IpnLog:
       column: listener_name
     transactionType:
       type: string
-      length: 16
+      length: 255
       fixed: false
       nullable: true
       column: transaction_type
