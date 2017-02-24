@@ -242,7 +242,9 @@ Your site will now be listening for incoming IPNs on:
 
     http://{{YOUR DOMAIN}}/ipn/ipn-no-notification
 
-Don't forget to tell PayPal about your new PayPal IPN URL.
+Don't forget to
+- tell PayPal about your new PayPal IPN URL
+- make sure the encoding PayPal uses for sending data to your website matches your system encoding (most likely UTF-8)
 
 **Disclaimer: the sample controllers provided are exactly that - samples. Please update one or other of these sample files with your own business logic before putting this bundle into production.**
 
@@ -337,6 +339,10 @@ If you have problems with any of your checks, then the next step is to manually 
 
 * Fix the bug
 * Repeat
+
+#### Incomplete texts indicate a wrong encoding
+
+If you see incomplete or scrambled texts in your data, make sure that the encoding [configured in your paypal settings](https://developer.paypal.com/docs/classic/admin/checkout-settings/#configuring-language-encoding) matches your system encoding. Most likely you need to change it to UTF-8.
 
 ### 8. Full configuration
 
