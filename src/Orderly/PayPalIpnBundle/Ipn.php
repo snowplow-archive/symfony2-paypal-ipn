@@ -5,6 +5,7 @@ namespace Orderly\PayPalIpnBundle;
 use Symfony\Component\DependencyInjection as DI;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /*
  * Copyright 2012 Orderly Ltd 
@@ -136,7 +137,11 @@ class Ipn
         $this->transactionType = null;
 
         $usingCache = FALSE;
-        $request = $this->_sc->get('request');
+        try {
+            $request = $this->_sc->get('request');
+        } catch (ServiceNotFoundException $e) {
+            $request = $this->_sc->get('request_stack')->getCurrentRequest();
+        }
 
         //get post parameters
         $parameters = $request->request->all();
