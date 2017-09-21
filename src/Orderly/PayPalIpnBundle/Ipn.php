@@ -256,6 +256,7 @@ class Ipn
         //
         // We throw an error if the payment_status code is unrecognised.
         switch ($this->ipnData['payment_status']) {
+            case "Canceled_Reversal": // Reversal has been cancelled, so we have the money now
             case "Completed": // Order has been paid for
                 $this->orderStatus = self::PAID;
                 break;
