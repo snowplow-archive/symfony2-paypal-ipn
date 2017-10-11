@@ -216,9 +216,16 @@ class Ipn
         // The IPN transaction is a genuine one - now we need to validate its contents.
         // First we check that the receiver email matches our email address.
         if (($this->ipnData['receiver_email'] != "" && $this->ipnData['receiver_email'] != $this->merchantEmail) || ($this->ipnData['receiver_email'] == "" && $this->ipnData['business'] != $this->merchantEmail)) {
-            $this->_logTransaction('IPN', 'ERROR', 'Receiver email ' . $this->ipnData['receiver_email'] . ' does not match merchant\'s email "'.$this->merchantEmail.'"', $ipnResponse);
-            
-            return FALSE;
+            if($this->ipnData['receiver_email'] && $this->ipnData['business']){
+                $rcvemail = explode("@", strtolower($this->ipnData['receiver_email']));
+                $bsnemail = explode("@", strtolower($this->ipnData['business']));
+                if($rcvemail[1] == $bsnemail[1]){
+                }else{
+                    $this->_logTransaction('IPN', 'ERROR', 'Receiver email ' . $this->ipnData['receiver_email'] . ' does not match merchant\'s email "'.$this->merchantEmail.'"', $ipnResponse);
+                    return FALSE;
+                }
+            }
+
         }
 
         // Now we check that PayPal and this listener agree on whether this is a test or not
