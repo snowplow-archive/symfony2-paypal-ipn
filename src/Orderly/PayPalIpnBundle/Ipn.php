@@ -271,6 +271,7 @@ class Ipn
             case "Processed": // Mostly used to indicate that a cheque has been received and is currently going through the verification process
                 $this->orderStatus = self::WAITING;
                 break;
+            case "Failed": // Payment failed after processing
             case "Voided": // Bounced or cancelled check
             case "Expired": // Credit card company didn't recognise card
             case "Reversed": // Credit card holder has got the credit card co to reverse the charge
